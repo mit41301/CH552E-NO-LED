@@ -1,0 +1,2628 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.0 #11195 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module main
+                                      6 	.optsdcc -mmcs51 --model-small
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _Manuf_Des
+                                     12 	.globl _Prod_Des
+                                     13 	.globl _SerDes
+                                     14 	.globl _LangDes
+                                     15 	.globl _CfgDesc
+                                     16 	.globl _DevDesc
+                                     17 	.globl _ftdi_rom
+                                     18 	.globl _main
+                                     19 	.globl _DeviceInterrupt
+                                     20 	.globl _USBDeviceEndPointCfg
+                                     21 	.globl _USBDeviceIntCfg
+                                     22 	.globl _USBDeviceCfg
+                                     23 	.globl _mDelaymS
+                                     24 	.globl _CfgFsys
+                                     25 	.globl ___memcpy
+                                     26 	.globl _P2B0
+                                     27 	.globl _P2B1
+                                     28 	.globl _P2B2
+                                     29 	.globl _P2B3
+                                     30 	.globl _P2B4
+                                     31 	.globl _P2B5
+                                     32 	.globl _P2B6
+                                     33 	.globl _P2B7
+                                     34 	.globl _TDO
+                                     35 	.globl _TDI
+                                     36 	.globl _TCK
+                                     37 	.globl _TMS
+                                     38 	.globl _BTN
+                                     39 	.globl _UIF_BUS_RST
+                                     40 	.globl _UIF_DETECT
+                                     41 	.globl _UIF_TRANSFER
+                                     42 	.globl _UIF_SUSPEND
+                                     43 	.globl _UIF_HST_SOF
+                                     44 	.globl _UIF_FIFO_OV
+                                     45 	.globl _U_SIE_FREE
+                                     46 	.globl _U_TOG_OK
+                                     47 	.globl _U_IS_NAK
+                                     48 	.globl _ADC_CHAN0
+                                     49 	.globl _ADC_CHAN1
+                                     50 	.globl _CMP_CHAN
+                                     51 	.globl _ADC_START
+                                     52 	.globl _ADC_IF
+                                     53 	.globl _CMP_IF
+                                     54 	.globl _CMPO
+                                     55 	.globl _U1RI
+                                     56 	.globl _U1TI
+                                     57 	.globl _U1RB8
+                                     58 	.globl _U1TB8
+                                     59 	.globl _U1REN
+                                     60 	.globl _U1SMOD
+                                     61 	.globl _U1SM0
+                                     62 	.globl _S0_R_FIFO
+                                     63 	.globl _S0_T_FIFO
+                                     64 	.globl _S0_FREE
+                                     65 	.globl _S0_IF_BYTE
+                                     66 	.globl _S0_IF_FIRST
+                                     67 	.globl _S0_IF_OV
+                                     68 	.globl _S0_FST_ACT
+                                     69 	.globl _CP_RL2
+                                     70 	.globl _C_T2
+                                     71 	.globl _TR2
+                                     72 	.globl _EXEN2
+                                     73 	.globl _TCLK
+                                     74 	.globl _RCLK
+                                     75 	.globl _EXF2
+                                     76 	.globl _CAP1F
+                                     77 	.globl _TF2
+                                     78 	.globl _RI
+                                     79 	.globl _TI
+                                     80 	.globl _RB8
+                                     81 	.globl _TB8
+                                     82 	.globl _REN
+                                     83 	.globl _SM2
+                                     84 	.globl _SM1
+                                     85 	.globl _SM0
+                                     86 	.globl _IT0
+                                     87 	.globl _IE0
+                                     88 	.globl _IT1
+                                     89 	.globl _IE1
+                                     90 	.globl _TR0
+                                     91 	.globl _TF0
+                                     92 	.globl _TR1
+                                     93 	.globl _TF1
+                                     94 	.globl _RXD
+                                     95 	.globl _PWM1_
+                                     96 	.globl _TXD
+                                     97 	.globl _PWM2_
+                                     98 	.globl _AIN3
+                                     99 	.globl _VBUS1
+                                    100 	.globl _INT0
+                                    101 	.globl _TXD1_
+                                    102 	.globl _INT1
+                                    103 	.globl _T0
+                                    104 	.globl _RXD1_
+                                    105 	.globl _PWM2
+                                    106 	.globl _T1
+                                    107 	.globl _UDP
+                                    108 	.globl _UDM
+                                    109 	.globl _TIN0
+                                    110 	.globl _CAP1
+                                    111 	.globl _T2
+                                    112 	.globl _AIN0
+                                    113 	.globl _VBUS2
+                                    114 	.globl _TIN1
+                                    115 	.globl _CAP2
+                                    116 	.globl _T2EX
+                                    117 	.globl _RXD_
+                                    118 	.globl _TXD_
+                                    119 	.globl _AIN1
+                                    120 	.globl _UCC1
+                                    121 	.globl _TIN2
+                                    122 	.globl _SCS
+                                    123 	.globl _CAP1_
+                                    124 	.globl _T2_
+                                    125 	.globl _AIN2
+                                    126 	.globl _UCC2
+                                    127 	.globl _TIN3
+                                    128 	.globl _PWM1
+                                    129 	.globl _MOSI
+                                    130 	.globl _TIN4
+                                    131 	.globl _RXD1
+                                    132 	.globl _MISO
+                                    133 	.globl _TIN5
+                                    134 	.globl _TXD1
+                                    135 	.globl _SCK
+                                    136 	.globl _IE_SPI0
+                                    137 	.globl _IE_TKEY
+                                    138 	.globl _IE_USB
+                                    139 	.globl _IE_ADC
+                                    140 	.globl _IE_UART1
+                                    141 	.globl _IE_PWMX
+                                    142 	.globl _IE_GPIO
+                                    143 	.globl _IE_WDOG
+                                    144 	.globl _PX0
+                                    145 	.globl _PT0
+                                    146 	.globl _PX1
+                                    147 	.globl _PT1
+                                    148 	.globl _PS
+                                    149 	.globl _PT2
+                                    150 	.globl _PL_FLAG
+                                    151 	.globl _PH_FLAG
+                                    152 	.globl _EX0
+                                    153 	.globl _ET0
+                                    154 	.globl _EX1
+                                    155 	.globl _ET1
+                                    156 	.globl _ES
+                                    157 	.globl _ET2
+                                    158 	.globl _E_DIS
+                                    159 	.globl _EA
+                                    160 	.globl _P
+                                    161 	.globl _F1
+                                    162 	.globl _OV
+                                    163 	.globl _RS0
+                                    164 	.globl _RS1
+                                    165 	.globl _F0
+                                    166 	.globl _AC
+                                    167 	.globl _CY
+                                    168 	.globl _UEP1_DMA_H
+                                    169 	.globl _UEP1_DMA_L
+                                    170 	.globl _UEP1_DMA
+                                    171 	.globl _UEP0_DMA_H
+                                    172 	.globl _UEP0_DMA_L
+                                    173 	.globl _UEP0_DMA
+                                    174 	.globl _UEP2_3_MOD
+                                    175 	.globl _UEP4_1_MOD
+                                    176 	.globl _UEP3_DMA_H
+                                    177 	.globl _UEP3_DMA_L
+                                    178 	.globl _UEP3_DMA
+                                    179 	.globl _UEP2_DMA_H
+                                    180 	.globl _UEP2_DMA_L
+                                    181 	.globl _UEP2_DMA
+                                    182 	.globl _USB_DEV_AD
+                                    183 	.globl _USB_CTRL
+                                    184 	.globl _USB_INT_EN
+                                    185 	.globl _UEP4_T_LEN
+                                    186 	.globl _UEP4_CTRL
+                                    187 	.globl _UEP0_T_LEN
+                                    188 	.globl _UEP0_CTRL
+                                    189 	.globl _USB_RX_LEN
+                                    190 	.globl _USB_MIS_ST
+                                    191 	.globl _USB_INT_ST
+                                    192 	.globl _USB_INT_FG
+                                    193 	.globl _UEP3_T_LEN
+                                    194 	.globl _UEP3_CTRL
+                                    195 	.globl _UEP2_T_LEN
+                                    196 	.globl _UEP2_CTRL
+                                    197 	.globl _UEP1_T_LEN
+                                    198 	.globl _UEP1_CTRL
+                                    199 	.globl _UDEV_CTRL
+                                    200 	.globl _USB_C_CTRL
+                                    201 	.globl _TKEY_DATH
+                                    202 	.globl _TKEY_DATL
+                                    203 	.globl _TKEY_DAT
+                                    204 	.globl _TKEY_CTRL
+                                    205 	.globl _ADC_DATA
+                                    206 	.globl _ADC_CFG
+                                    207 	.globl _ADC_CTRL
+                                    208 	.globl _SBAUD1
+                                    209 	.globl _SBUF1
+                                    210 	.globl _SCON1
+                                    211 	.globl _SPI0_SETUP
+                                    212 	.globl _SPI0_CK_SE
+                                    213 	.globl _SPI0_CTRL
+                                    214 	.globl _SPI0_DATA
+                                    215 	.globl _SPI0_STAT
+                                    216 	.globl _PWM_CK_SE
+                                    217 	.globl _PWM_CTRL
+                                    218 	.globl _PWM_DATA1
+                                    219 	.globl _PWM_DATA2
+                                    220 	.globl _T2CAP1H
+                                    221 	.globl _T2CAP1L
+                                    222 	.globl _T2CAP1
+                                    223 	.globl _TH2
+                                    224 	.globl _TL2
+                                    225 	.globl _T2COUNT
+                                    226 	.globl _RCAP2H
+                                    227 	.globl _RCAP2L
+                                    228 	.globl _RCAP2
+                                    229 	.globl _T2MOD
+                                    230 	.globl _T2CON
+                                    231 	.globl _SBUF
+                                    232 	.globl _SCON
+                                    233 	.globl _TH1
+                                    234 	.globl _TH0
+                                    235 	.globl _TL1
+                                    236 	.globl _TL0
+                                    237 	.globl _TMOD
+                                    238 	.globl _TCON
+                                    239 	.globl _XBUS_AUX
+                                    240 	.globl _PIN_FUNC
+                                    241 	.globl _P3_DIR_PU
+                                    242 	.globl _P3_MOD_OC
+                                    243 	.globl _P3
+                                    244 	.globl _P2
+                                    245 	.globl _P1_DIR_PU
+                                    246 	.globl _P1_MOD_OC
+                                    247 	.globl _P1
+                                    248 	.globl _ROM_CTRL
+                                    249 	.globl _ROM_DATA_H
+                                    250 	.globl _ROM_DATA_L
+                                    251 	.globl _ROM_DATA
+                                    252 	.globl _ROM_ADDR_H
+                                    253 	.globl _ROM_ADDR_L
+                                    254 	.globl _ROM_ADDR
+                                    255 	.globl _GPIO_IE
+                                    256 	.globl _IP_EX
+                                    257 	.globl _IE_EX
+                                    258 	.globl _IP
+                                    259 	.globl _IE
+                                    260 	.globl _WDOG_COUNT
+                                    261 	.globl _RESET_KEEP
+                                    262 	.globl _WAKE_CTRL
+                                    263 	.globl _CLOCK_CFG
+                                    264 	.globl _PCON
+                                    265 	.globl _GLOBAL_CFG
+                                    266 	.globl _SAFE_MOD
+                                    267 	.globl _DPH
+                                    268 	.globl _DPL
+                                    269 	.globl _SP
+                                    270 	.globl _B
+                                    271 	.globl _ACC
+                                    272 	.globl _PSW
+                                    273 	.globl _Ep2Buffer
+                                    274 	.globl _Ep1Buffer
+                                    275 	.globl _Ep0Buffer
+                                    276 	.globl _receive_buffer
+                                    277 	.globl _transmit_buffer
+                                    278 	.globl _send_len
+                                    279 	.globl _transmit_buffer_out_offset
+                                    280 	.globl _transmit_buffer_in_offset
+                                    281 	.globl _latency_timer
+                                    282 	.globl _ep1_in_busy
+                                    283 	.globl _sof_count
+                                    284 	.globl _USBBufOutPoint
+                                    285 	.globl _USBByteCount
+                                    286 	.globl _SetupReqBuf
+                                    287 	.globl _pDescr
+                                    288 	.globl _send_dummy
+                                    289 	.globl _vendor_control
+                                    290 	.globl _UsbConfig
+                                    291 	.globl _Count
+                                    292 	.globl _SetupReq
+                                    293 	.globl _SetupLen
+                                    294 ;--------------------------------------------------------
+                                    295 ; special function registers
+                                    296 ;--------------------------------------------------------
+                                    297 	.area RSEG    (ABS,DATA)
+      000000                        298 	.org 0x0000
+                           0000D0   299 _PSW	=	0x00d0
+                           0000E0   300 _ACC	=	0x00e0
+                           0000F0   301 _B	=	0x00f0
+                           000081   302 _SP	=	0x0081
+                           000082   303 _DPL	=	0x0082
+                           000083   304 _DPH	=	0x0083
+                           0000A1   305 _SAFE_MOD	=	0x00a1
+                           0000B1   306 _GLOBAL_CFG	=	0x00b1
+                           000087   307 _PCON	=	0x0087
+                           0000B9   308 _CLOCK_CFG	=	0x00b9
+                           0000A9   309 _WAKE_CTRL	=	0x00a9
+                           0000FE   310 _RESET_KEEP	=	0x00fe
+                           0000FF   311 _WDOG_COUNT	=	0x00ff
+                           0000A8   312 _IE	=	0x00a8
+                           0000B8   313 _IP	=	0x00b8
+                           0000E8   314 _IE_EX	=	0x00e8
+                           0000E9   315 _IP_EX	=	0x00e9
+                           0000C7   316 _GPIO_IE	=	0x00c7
+                           008584   317 _ROM_ADDR	=	0x8584
+                           000084   318 _ROM_ADDR_L	=	0x0084
+                           000085   319 _ROM_ADDR_H	=	0x0085
+                           008F8E   320 _ROM_DATA	=	0x8f8e
+                           00008E   321 _ROM_DATA_L	=	0x008e
+                           00008F   322 _ROM_DATA_H	=	0x008f
+                           000086   323 _ROM_CTRL	=	0x0086
+                           000090   324 _P1	=	0x0090
+                           000092   325 _P1_MOD_OC	=	0x0092
+                           000093   326 _P1_DIR_PU	=	0x0093
+                           0000A0   327 _P2	=	0x00a0
+                           0000B0   328 _P3	=	0x00b0
+                           000096   329 _P3_MOD_OC	=	0x0096
+                           000097   330 _P3_DIR_PU	=	0x0097
+                           0000C6   331 _PIN_FUNC	=	0x00c6
+                           0000A2   332 _XBUS_AUX	=	0x00a2
+                           000088   333 _TCON	=	0x0088
+                           000089   334 _TMOD	=	0x0089
+                           00008A   335 _TL0	=	0x008a
+                           00008B   336 _TL1	=	0x008b
+                           00008C   337 _TH0	=	0x008c
+                           00008D   338 _TH1	=	0x008d
+                           000098   339 _SCON	=	0x0098
+                           000099   340 _SBUF	=	0x0099
+                           0000C8   341 _T2CON	=	0x00c8
+                           0000C9   342 _T2MOD	=	0x00c9
+                           00CBCA   343 _RCAP2	=	0xcbca
+                           0000CA   344 _RCAP2L	=	0x00ca
+                           0000CB   345 _RCAP2H	=	0x00cb
+                           00CDCC   346 _T2COUNT	=	0xcdcc
+                           0000CC   347 _TL2	=	0x00cc
+                           0000CD   348 _TH2	=	0x00cd
+                           00CFCE   349 _T2CAP1	=	0xcfce
+                           0000CE   350 _T2CAP1L	=	0x00ce
+                           0000CF   351 _T2CAP1H	=	0x00cf
+                           00009B   352 _PWM_DATA2	=	0x009b
+                           00009C   353 _PWM_DATA1	=	0x009c
+                           00009D   354 _PWM_CTRL	=	0x009d
+                           00009E   355 _PWM_CK_SE	=	0x009e
+                           0000F8   356 _SPI0_STAT	=	0x00f8
+                           0000F9   357 _SPI0_DATA	=	0x00f9
+                           0000FA   358 _SPI0_CTRL	=	0x00fa
+                           0000FB   359 _SPI0_CK_SE	=	0x00fb
+                           0000FC   360 _SPI0_SETUP	=	0x00fc
+                           0000C0   361 _SCON1	=	0x00c0
+                           0000C1   362 _SBUF1	=	0x00c1
+                           0000C2   363 _SBAUD1	=	0x00c2
+                           000080   364 _ADC_CTRL	=	0x0080
+                           00009A   365 _ADC_CFG	=	0x009a
+                           00009F   366 _ADC_DATA	=	0x009f
+                           0000C3   367 _TKEY_CTRL	=	0x00c3
+                           00C5C4   368 _TKEY_DAT	=	0xc5c4
+                           0000C4   369 _TKEY_DATL	=	0x00c4
+                           0000C5   370 _TKEY_DATH	=	0x00c5
+                           000091   371 _USB_C_CTRL	=	0x0091
+                           0000D1   372 _UDEV_CTRL	=	0x00d1
+                           0000D2   373 _UEP1_CTRL	=	0x00d2
+                           0000D3   374 _UEP1_T_LEN	=	0x00d3
+                           0000D4   375 _UEP2_CTRL	=	0x00d4
+                           0000D5   376 _UEP2_T_LEN	=	0x00d5
+                           0000D6   377 _UEP3_CTRL	=	0x00d6
+                           0000D7   378 _UEP3_T_LEN	=	0x00d7
+                           0000D8   379 _USB_INT_FG	=	0x00d8
+                           0000D9   380 _USB_INT_ST	=	0x00d9
+                           0000DA   381 _USB_MIS_ST	=	0x00da
+                           0000DB   382 _USB_RX_LEN	=	0x00db
+                           0000DC   383 _UEP0_CTRL	=	0x00dc
+                           0000DD   384 _UEP0_T_LEN	=	0x00dd
+                           0000DE   385 _UEP4_CTRL	=	0x00de
+                           0000DF   386 _UEP4_T_LEN	=	0x00df
+                           0000E1   387 _USB_INT_EN	=	0x00e1
+                           0000E2   388 _USB_CTRL	=	0x00e2
+                           0000E3   389 _USB_DEV_AD	=	0x00e3
+                           00E5E4   390 _UEP2_DMA	=	0xe5e4
+                           0000E4   391 _UEP2_DMA_L	=	0x00e4
+                           0000E5   392 _UEP2_DMA_H	=	0x00e5
+                           00E7E6   393 _UEP3_DMA	=	0xe7e6
+                           0000E6   394 _UEP3_DMA_L	=	0x00e6
+                           0000E7   395 _UEP3_DMA_H	=	0x00e7
+                           0000EA   396 _UEP4_1_MOD	=	0x00ea
+                           0000EB   397 _UEP2_3_MOD	=	0x00eb
+                           00EDEC   398 _UEP0_DMA	=	0xedec
+                           0000EC   399 _UEP0_DMA_L	=	0x00ec
+                           0000ED   400 _UEP0_DMA_H	=	0x00ed
+                           00EFEE   401 _UEP1_DMA	=	0xefee
+                           0000EE   402 _UEP1_DMA_L	=	0x00ee
+                           0000EF   403 _UEP1_DMA_H	=	0x00ef
+                                    404 ;--------------------------------------------------------
+                                    405 ; special function bits
+                                    406 ;--------------------------------------------------------
+                                    407 	.area RSEG    (ABS,DATA)
+      000000                        408 	.org 0x0000
+                           0000D7   409 _CY	=	0x00d7
+                           0000D6   410 _AC	=	0x00d6
+                           0000D5   411 _F0	=	0x00d5
+                           0000D4   412 _RS1	=	0x00d4
+                           0000D3   413 _RS0	=	0x00d3
+                           0000D2   414 _OV	=	0x00d2
+                           0000D1   415 _F1	=	0x00d1
+                           0000D0   416 _P	=	0x00d0
+                           0000AF   417 _EA	=	0x00af
+                           0000AE   418 _E_DIS	=	0x00ae
+                           0000AD   419 _ET2	=	0x00ad
+                           0000AC   420 _ES	=	0x00ac
+                           0000AB   421 _ET1	=	0x00ab
+                           0000AA   422 _EX1	=	0x00aa
+                           0000A9   423 _ET0	=	0x00a9
+                           0000A8   424 _EX0	=	0x00a8
+                           0000BF   425 _PH_FLAG	=	0x00bf
+                           0000BE   426 _PL_FLAG	=	0x00be
+                           0000BD   427 _PT2	=	0x00bd
+                           0000BC   428 _PS	=	0x00bc
+                           0000BB   429 _PT1	=	0x00bb
+                           0000BA   430 _PX1	=	0x00ba
+                           0000B9   431 _PT0	=	0x00b9
+                           0000B8   432 _PX0	=	0x00b8
+                           0000EF   433 _IE_WDOG	=	0x00ef
+                           0000EE   434 _IE_GPIO	=	0x00ee
+                           0000ED   435 _IE_PWMX	=	0x00ed
+                           0000EC   436 _IE_UART1	=	0x00ec
+                           0000EB   437 _IE_ADC	=	0x00eb
+                           0000EA   438 _IE_USB	=	0x00ea
+                           0000E9   439 _IE_TKEY	=	0x00e9
+                           0000E8   440 _IE_SPI0	=	0x00e8
+                           000097   441 _SCK	=	0x0097
+                           000097   442 _TXD1	=	0x0097
+                           000097   443 _TIN5	=	0x0097
+                           000096   444 _MISO	=	0x0096
+                           000096   445 _RXD1	=	0x0096
+                           000096   446 _TIN4	=	0x0096
+                           000095   447 _MOSI	=	0x0095
+                           000095   448 _PWM1	=	0x0095
+                           000095   449 _TIN3	=	0x0095
+                           000095   450 _UCC2	=	0x0095
+                           000095   451 _AIN2	=	0x0095
+                           000094   452 _T2_	=	0x0094
+                           000094   453 _CAP1_	=	0x0094
+                           000094   454 _SCS	=	0x0094
+                           000094   455 _TIN2	=	0x0094
+                           000094   456 _UCC1	=	0x0094
+                           000094   457 _AIN1	=	0x0094
+                           000093   458 _TXD_	=	0x0093
+                           000092   459 _RXD_	=	0x0092
+                           000091   460 _T2EX	=	0x0091
+                           000091   461 _CAP2	=	0x0091
+                           000091   462 _TIN1	=	0x0091
+                           000091   463 _VBUS2	=	0x0091
+                           000091   464 _AIN0	=	0x0091
+                           000090   465 _T2	=	0x0090
+                           000090   466 _CAP1	=	0x0090
+                           000090   467 _TIN0	=	0x0090
+                           0000B7   468 _UDM	=	0x00b7
+                           0000B6   469 _UDP	=	0x00b6
+                           0000B5   470 _T1	=	0x00b5
+                           0000B4   471 _PWM2	=	0x00b4
+                           0000B4   472 _RXD1_	=	0x00b4
+                           0000B4   473 _T0	=	0x00b4
+                           0000B3   474 _INT1	=	0x00b3
+                           0000B2   475 _TXD1_	=	0x00b2
+                           0000B2   476 _INT0	=	0x00b2
+                           0000B2   477 _VBUS1	=	0x00b2
+                           0000B2   478 _AIN3	=	0x00b2
+                           0000B1   479 _PWM2_	=	0x00b1
+                           0000B1   480 _TXD	=	0x00b1
+                           0000B0   481 _PWM1_	=	0x00b0
+                           0000B0   482 _RXD	=	0x00b0
+                           00008F   483 _TF1	=	0x008f
+                           00008E   484 _TR1	=	0x008e
+                           00008D   485 _TF0	=	0x008d
+                           00008C   486 _TR0	=	0x008c
+                           00008B   487 _IE1	=	0x008b
+                           00008A   488 _IT1	=	0x008a
+                           000089   489 _IE0	=	0x0089
+                           000088   490 _IT0	=	0x0088
+                           00009F   491 _SM0	=	0x009f
+                           00009E   492 _SM1	=	0x009e
+                           00009D   493 _SM2	=	0x009d
+                           00009C   494 _REN	=	0x009c
+                           00009B   495 _TB8	=	0x009b
+                           00009A   496 _RB8	=	0x009a
+                           000099   497 _TI	=	0x0099
+                           000098   498 _RI	=	0x0098
+                           0000CF   499 _TF2	=	0x00cf
+                           0000CF   500 _CAP1F	=	0x00cf
+                           0000CE   501 _EXF2	=	0x00ce
+                           0000CD   502 _RCLK	=	0x00cd
+                           0000CC   503 _TCLK	=	0x00cc
+                           0000CB   504 _EXEN2	=	0x00cb
+                           0000CA   505 _TR2	=	0x00ca
+                           0000C9   506 _C_T2	=	0x00c9
+                           0000C8   507 _CP_RL2	=	0x00c8
+                           0000FF   508 _S0_FST_ACT	=	0x00ff
+                           0000FE   509 _S0_IF_OV	=	0x00fe
+                           0000FD   510 _S0_IF_FIRST	=	0x00fd
+                           0000FC   511 _S0_IF_BYTE	=	0x00fc
+                           0000FB   512 _S0_FREE	=	0x00fb
+                           0000FA   513 _S0_T_FIFO	=	0x00fa
+                           0000F8   514 _S0_R_FIFO	=	0x00f8
+                           0000C7   515 _U1SM0	=	0x00c7
+                           0000C5   516 _U1SMOD	=	0x00c5
+                           0000C4   517 _U1REN	=	0x00c4
+                           0000C3   518 _U1TB8	=	0x00c3
+                           0000C2   519 _U1RB8	=	0x00c2
+                           0000C1   520 _U1TI	=	0x00c1
+                           0000C0   521 _U1RI	=	0x00c0
+                           000087   522 _CMPO	=	0x0087
+                           000086   523 _CMP_IF	=	0x0086
+                           000085   524 _ADC_IF	=	0x0085
+                           000084   525 _ADC_START	=	0x0084
+                           000083   526 _CMP_CHAN	=	0x0083
+                           000081   527 _ADC_CHAN1	=	0x0081
+                           000080   528 _ADC_CHAN0	=	0x0080
+                           0000DF   529 _U_IS_NAK	=	0x00df
+                           0000DE   530 _U_TOG_OK	=	0x00de
+                           0000DD   531 _U_SIE_FREE	=	0x00dd
+                           0000DC   532 _UIF_FIFO_OV	=	0x00dc
+                           0000DB   533 _UIF_HST_SOF	=	0x00db
+                           0000DA   534 _UIF_SUSPEND	=	0x00da
+                           0000D9   535 _UIF_TRANSFER	=	0x00d9
+                           0000D8   536 _UIF_DETECT	=	0x00d8
+                           0000D8   537 _UIF_BUS_RST	=	0x00d8
+                           0000B2   538 _BTN	=	0x00b2
+                           000094   539 _TMS	=	0x0094
+                           000097   540 _TCK	=	0x0097
+                           000095   541 _TDI	=	0x0095
+                           000096   542 _TDO	=	0x0096
+                           0000A7   543 _P2B7	=	0x00a7
+                           0000A6   544 _P2B6	=	0x00a6
+                           0000A5   545 _P2B5	=	0x00a5
+                           0000A4   546 _P2B4	=	0x00a4
+                           0000A3   547 _P2B3	=	0x00a3
+                           0000A2   548 _P2B2	=	0x00a2
+                           0000A1   549 _P2B1	=	0x00a1
+                           0000A0   550 _P2B0	=	0x00a0
+                                    551 ;--------------------------------------------------------
+                                    552 ; overlayable register banks
+                                    553 ;--------------------------------------------------------
+                                    554 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        555 	.ds 8
+                                    556 ;--------------------------------------------------------
+                                    557 ; overlayable bit register bank
+                                    558 ;--------------------------------------------------------
+                                    559 	.area BIT_BANK	(REL,OVR,DATA)
+      000000                        560 bits:
+      000000                        561 	.ds 1
+                           008000   562 	b0 = bits[0]
+                           008100   563 	b1 = bits[1]
+                           008200   564 	b2 = bits[2]
+                           008300   565 	b3 = bits[3]
+                           008400   566 	b4 = bits[4]
+                           008500   567 	b5 = bits[5]
+                           008600   568 	b6 = bits[6]
+                           008700   569 	b7 = bits[7]
+                                    570 ;--------------------------------------------------------
+                                    571 ; internal ram data
+                                    572 ;--------------------------------------------------------
+                                    573 	.area DSEG    (DATA)
+      000000                        574 _SetupLen::
+      000000                        575 	.ds 2
+      000002                        576 _SetupReq::
+      000002                        577 	.ds 1
+      000003                        578 _Count::
+      000003                        579 	.ds 1
+      000004                        580 _UsbConfig::
+      000004                        581 	.ds 1
+      000005                        582 _vendor_control::
+      000005                        583 	.ds 1
+      000006                        584 _send_dummy::
+      000006                        585 	.ds 1
+      000007                        586 _pDescr::
+      000007                        587 	.ds 3
+      00000A                        588 _SetupReqBuf::
+      00000A                        589 	.ds 8
+      000012                        590 _main_read_en_65536_102:
+      000012                        591 	.ds 1
+      000013                        592 _main_timeout_count_65536_102:
+      000013                        593 	.ds 2
+                                    594 ;--------------------------------------------------------
+                                    595 ; overlayable items in internal ram 
+                                    596 ;--------------------------------------------------------
+                                    597 ;--------------------------------------------------------
+                                    598 ; Stack segment in internal ram 
+                                    599 ;--------------------------------------------------------
+                                    600 	.area	SSEG
+      000000                        601 __start__stack:
+      000000                        602 	.ds	1
+                                    603 
+                                    604 ;--------------------------------------------------------
+                                    605 ; indirectly addressable internal ram data
+                                    606 ;--------------------------------------------------------
+                                    607 	.area ISEG    (DATA)
+      000000                        608 _USBByteCount::
+      000000                        609 	.ds 1
+      000001                        610 _USBBufOutPoint::
+      000001                        611 	.ds 1
+      000002                        612 _sof_count::
+      000002                        613 	.ds 2
+      000004                        614 _ep1_in_busy::
+      000004                        615 	.ds 1
+      000005                        616 _latency_timer::
+      000005                        617 	.ds 1
+      000006                        618 _transmit_buffer_in_offset::
+      000006                        619 	.ds 1
+      000007                        620 _transmit_buffer_out_offset::
+      000007                        621 	.ds 1
+      000008                        622 _send_len::
+      000008                        623 	.ds 1
+                                    624 ;--------------------------------------------------------
+                                    625 ; absolute internal ram data
+                                    626 ;--------------------------------------------------------
+                                    627 	.area IABS    (ABS,DATA)
+                                    628 	.area IABS    (ABS,DATA)
+                                    629 ;--------------------------------------------------------
+                                    630 ; bit data
+                                    631 ;--------------------------------------------------------
+                                    632 	.area BSEG    (BIT)
+                                    633 ;--------------------------------------------------------
+                                    634 ; paged external ram data
+                                    635 ;--------------------------------------------------------
+                                    636 	.area PSEG    (PAG,XDATA)
+                                    637 ;--------------------------------------------------------
+                                    638 ; external ram data
+                                    639 ;--------------------------------------------------------
+                                    640 	.area XSEG    (XDATA)
+                           000000   641 _transmit_buffer	=	0x0000
+                           000080   642 _receive_buffer	=	0x0080
+                           000100   643 _Ep0Buffer	=	0x0100
+                           000140   644 _Ep1Buffer	=	0x0140
+                           000180   645 _Ep2Buffer	=	0x0180
+                                    646 ;--------------------------------------------------------
+                                    647 ; absolute external ram data
+                                    648 ;--------------------------------------------------------
+                                    649 	.area XABS    (ABS,XDATA)
+                                    650 ;--------------------------------------------------------
+                                    651 ; external initialized ram data
+                                    652 ;--------------------------------------------------------
+                                    653 	.area XISEG   (XDATA)
+                                    654 	.area HOME    (CODE)
+                                    655 	.area GSINIT0 (CODE)
+                                    656 	.area GSINIT1 (CODE)
+                                    657 	.area GSINIT2 (CODE)
+                                    658 	.area GSINIT3 (CODE)
+                                    659 	.area GSINIT4 (CODE)
+                                    660 	.area GSINIT5 (CODE)
+                                    661 	.area GSINIT  (CODE)
+                                    662 	.area GSFINAL (CODE)
+                                    663 	.area CSEG    (CODE)
+                                    664 ;--------------------------------------------------------
+                                    665 ; interrupt vector 
+                                    666 ;--------------------------------------------------------
+                                    667 	.area HOME    (CODE)
+      000000                        668 __interrupt_vect:
+      000000 02r00r00         [24]  669 	ljmp	__sdcc_gsinit_startup
+      000003 32               [24]  670 	reti
+      000004                        671 	.ds	7
+      00000B 32               [24]  672 	reti
+      00000C                        673 	.ds	7
+      000013 32               [24]  674 	reti
+      000014                        675 	.ds	7
+      00001B 32               [24]  676 	reti
+      00001C                        677 	.ds	7
+      000023 32               [24]  678 	reti
+      000024                        679 	.ds	7
+      00002B 32               [24]  680 	reti
+      00002C                        681 	.ds	7
+      000033 32               [24]  682 	reti
+      000034                        683 	.ds	7
+      00003B 32               [24]  684 	reti
+      00003C                        685 	.ds	7
+      000043 02r00r4F         [24]  686 	ljmp	_DeviceInterrupt
+                                    687 ;--------------------------------------------------------
+                                    688 ; global & static initialisations
+                                    689 ;--------------------------------------------------------
+                                    690 	.area HOME    (CODE)
+                                    691 	.area GSINIT  (CODE)
+                                    692 	.area GSFINAL (CODE)
+                                    693 	.area GSINIT  (CODE)
+                                    694 	.globl __sdcc_gsinit_startup
+                                    695 	.globl __sdcc_program_startup
+                                    696 	.globl __start__stack
+                                    697 	.globl __mcs51_genXINIT
+                                    698 	.globl __mcs51_genXRAMCLEAR
+                                    699 	.globl __mcs51_genRAMCLEAR
+                                    700 ;	main.c:119: volatile __idata uint8_t USBByteCount = 0;   //代表USB端点接收到的数据
+      000000 78r00            [12]  701 	mov	r0,#_USBByteCount
+      000002 76 00            [12]  702 	mov	@r0,#0x00
+                                    703 ;	main.c:120: volatile __idata uint8_t USBBufOutPoint = 0; //取数据指针
+      000004 78r01            [12]  704 	mov	r0,#_USBBufOutPoint
+      000006 76 00            [12]  705 	mov	@r0,#0x00
+                                    706 ;	main.c:121: volatile __idata uint16_t sof_count = 0;
+      000008 78r02            [12]  707 	mov	r0,#_sof_count
+      00000A 76 00            [12]  708 	mov	@r0,#0x00
+      00000C 08               [12]  709 	inc	r0
+      00000D 76 00            [12]  710 	mov	@r0,#0x00
+                                    711 ;	main.c:122: volatile __idata uint8_t ep1_in_busy = 0; //上传端点是否忙标志
+      00000F 78r04            [12]  712 	mov	r0,#_ep1_in_busy
+      000011 76 00            [12]  713 	mov	@r0,#0x00
+                                    714 ;	main.c:123: volatile __idata uint8_t latency_timer = 4;
+      000013 78r05            [12]  715 	mov	r0,#_latency_timer
+      000015 76 04            [12]  716 	mov	@r0,#0x04
+                                    717 	.area GSFINAL (CODE)
+      000000 02r00r46         [24]  718 	ljmp	__sdcc_program_startup
+                                    719 ;--------------------------------------------------------
+                                    720 ; Home
+                                    721 ;--------------------------------------------------------
+                                    722 	.area HOME    (CODE)
+                                    723 	.area HOME    (CODE)
+      000046                        724 __sdcc_program_startup:
+      000046 02r05rBE         [24]  725 	ljmp	_main
+                                    726 ;	return from main will return to caller
+                                    727 ;--------------------------------------------------------
+                                    728 ; code
+                                    729 ;--------------------------------------------------------
+                                    730 	.area CSEG    (CODE)
+                                    731 ;------------------------------------------------------------
+                                    732 ;Allocation info for local variables in function 'USBDeviceCfg'
+                                    733 ;------------------------------------------------------------
+                                    734 ;	main.c:132: void USBDeviceCfg()
+                                    735 ;	-----------------------------------------
+                                    736 ;	 function USBDeviceCfg
+                                    737 ;	-----------------------------------------
+      000000                        738 _USBDeviceCfg:
+                           000007   739 	ar7 = 0x07
+                           000006   740 	ar6 = 0x06
+                           000005   741 	ar5 = 0x05
+                           000004   742 	ar4 = 0x04
+                           000003   743 	ar3 = 0x03
+                           000002   744 	ar2 = 0x02
+                           000001   745 	ar1 = 0x01
+                           000000   746 	ar0 = 0x00
+                                    747 ;	main.c:134: USB_CTRL = 0x00;									   //清空USB控制寄存器
+      000000 75 E2 00         [24]  748 	mov	_USB_CTRL,#0x00
+                                    749 ;	main.c:135: USB_CTRL &= ~bUC_HOST_MODE;							   //该位为选择设备模式
+      000003 53 E2 7F         [24]  750 	anl	_USB_CTRL,#0x7f
+                                    751 ;	main.c:136: USB_CTRL |= bUC_DEV_PU_EN | bUC_INT_BUSY | bUC_DMA_EN; //USB设备和内部上拉使能,在中断期间中断标志未清除前自动返回NAK
+      000006 43 E2 29         [24]  752 	orl	_USB_CTRL,#0x29
+                                    753 ;	main.c:137: USB_DEV_AD = 0x00;									   //设备地址初始化
+      000009 75 E3 00         [24]  754 	mov	_USB_DEV_AD,#0x00
+                                    755 ;	main.c:140: USB_CTRL &= ~bUC_LOW_SPEED;
+      00000C 53 E2 BF         [24]  756 	anl	_USB_CTRL,#0xbf
+                                    757 ;	main.c:141: UDEV_CTRL &= ~bUD_LOW_SPEED; //选择全速12M模式，默认方式
+      00000F 53 D1 FB         [24]  758 	anl	_UDEV_CTRL,#0xfb
+                                    759 ;	main.c:142: UDEV_CTRL = bUD_PD_DIS;		 // 禁止DP/DM下拉电阻
+      000012 75 D1 80         [24]  760 	mov	_UDEV_CTRL,#0x80
+                                    761 ;	main.c:143: UDEV_CTRL |= bUD_PORT_EN;	//使能物理端口
+      000015 43 D1 01         [24]  762 	orl	_UDEV_CTRL,#0x01
+                                    763 ;	main.c:144: }
+      000018 22               [24]  764 	ret
+                                    765 ;------------------------------------------------------------
+                                    766 ;Allocation info for local variables in function 'USBDeviceIntCfg'
+                                    767 ;------------------------------------------------------------
+                                    768 ;	main.c:152: void USBDeviceIntCfg()
+                                    769 ;	-----------------------------------------
+                                    770 ;	 function USBDeviceIntCfg
+                                    771 ;	-----------------------------------------
+      000019                        772 _USBDeviceIntCfg:
+                                    773 ;	main.c:154: USB_INT_EN |= bUIE_SUSPEND;  //使能设备挂起中断
+      000019 43 E1 04         [24]  774 	orl	_USB_INT_EN,#0x04
+                                    775 ;	main.c:155: USB_INT_EN |= bUIE_TRANSFER; //使能USB传输完成中断
+      00001C 43 E1 02         [24]  776 	orl	_USB_INT_EN,#0x02
+                                    777 ;	main.c:156: USB_INT_EN |= bUIE_BUS_RST;  //使能设备模式USB总线复位中断
+      00001F 43 E1 01         [24]  778 	orl	_USB_INT_EN,#0x01
+                                    779 ;	main.c:157: USB_INT_EN |= bUIE_DEV_SOF;	 //For timeout count.
+      000022 43 E1 80         [24]  780 	orl	_USB_INT_EN,#0x80
+                                    781 ;	main.c:158: USB_INT_FG |= 0x1F;			 //清中断标志
+      000025 43 D8 1F         [24]  782 	orl	_USB_INT_FG,#0x1f
+                                    783 ;	main.c:159: IE_USB = 1;					 //使能USB中断
+                                    784 ;	assignBit
+      000028 D2 EA            [12]  785 	setb	_IE_USB
+                                    786 ;	main.c:160: EA = 1;						 //允许单片机中断
+                                    787 ;	assignBit
+      00002A D2 AF            [12]  788 	setb	_EA
+                                    789 ;	main.c:161: }
+      00002C 22               [24]  790 	ret
+                                    791 ;------------------------------------------------------------
+                                    792 ;Allocation info for local variables in function 'USBDeviceEndPointCfg'
+                                    793 ;------------------------------------------------------------
+                                    794 ;	main.c:169: void USBDeviceEndPointCfg()
+                                    795 ;	-----------------------------------------
+                                    796 ;	 function USBDeviceEndPointCfg
+                                    797 ;	-----------------------------------------
+      00002D                        798 _USBDeviceEndPointCfg:
+                                    799 ;	main.c:171: UEP1_DMA = (uint16_t)Ep1Buffer; //端点1 IN数据传输地址
+      00002D 75 EE 40         [24]  800 	mov	((_UEP1_DMA >> 0) & 0xFF),#_Ep1Buffer
+      000030 75 EF 01         [24]  801 	mov	((_UEP1_DMA >> 8) & 0xFF),#(_Ep1Buffer >> 8)
+                                    802 ;	main.c:172: UEP2_DMA = (uint16_t)Ep2Buffer; //端点2 OUT数据传输地址
+      000033 75 E4 80         [24]  803 	mov	((_UEP2_DMA >> 0) & 0xFF),#_Ep2Buffer
+      000036 75 E5 01         [24]  804 	mov	((_UEP2_DMA >> 8) & 0xFF),#(_Ep2Buffer >> 8)
+                                    805 ;	main.c:173: UEP2_3_MOD = 0x08;
+      000039 75 EB 08         [24]  806 	mov	_UEP2_3_MOD,#0x08
+                                    807 ;	main.c:174: UEP2_CTRL = bUEP_AUTO_TOG | UEP_R_RES_ACK; //端点2自动翻转同步标志位，OUT返回ACK
+      00003C 75 D4 10         [24]  808 	mov	_UEP2_CTRL,#0x10
+                                    809 ;	main.c:175: UEP1_CTRL = bUEP_AUTO_TOG | UEP_T_RES_NAK; //端点1自动翻转同步标志位，IN事务返回NAK
+      00003F 75 D2 12         [24]  810 	mov	_UEP1_CTRL,#0x12
+                                    811 ;	main.c:176: UEP0_DMA = (uint16_t)Ep0Buffer;			   //端点0数据传输地址
+      000042 75 EC 00         [24]  812 	mov	((_UEP0_DMA >> 0) & 0xFF),#_Ep0Buffer
+      000045 75 ED 01         [24]  813 	mov	((_UEP0_DMA >> 8) & 0xFF),#(_Ep0Buffer >> 8)
+                                    814 ;	main.c:177: UEP4_1_MOD = 0x40;						   //端点1上传缓冲区；端点0单64字节收发缓冲区
+      000048 75 EA 40         [24]  815 	mov	_UEP4_1_MOD,#0x40
+                                    816 ;	main.c:178: UEP0_CTRL = UEP_R_RES_ACK | UEP_T_RES_NAK; //手动翻转，OUT事务返回ACK，IN事务返回NAK
+      00004B 75 DC 02         [24]  817 	mov	_UEP0_CTRL,#0x02
+                                    818 ;	main.c:179: }
+      00004E 22               [24]  819 	ret
+                                    820 ;------------------------------------------------------------
+                                    821 ;Allocation info for local variables in function 'DeviceInterrupt'
+                                    822 ;------------------------------------------------------------
+                                    823 ;len                       Allocated to registers r4 r5 
+                                    824 ;addr                      Allocated to registers r5 
+                                    825 ;------------------------------------------------------------
+                                    826 ;	main.c:185: void DeviceInterrupt(void) __interrupt(INT_NO_USB) //USB中断服务程序,使用寄存器组1
+                                    827 ;	-----------------------------------------
+                                    828 ;	 function DeviceInterrupt
+                                    829 ;	-----------------------------------------
+      00004F                        830 _DeviceInterrupt:
+      00004F C0*00            [24]  831 	push	bits
+      000051 C0 E0            [24]  832 	push	acc
+      000053 C0 F0            [24]  833 	push	b
+      000055 C0 82            [24]  834 	push	dpl
+      000057 C0 83            [24]  835 	push	dph
+      000059 C0 07            [24]  836 	push	(0+7)
+      00005B C0 06            [24]  837 	push	(0+6)
+      00005D C0 05            [24]  838 	push	(0+5)
+      00005F C0 04            [24]  839 	push	(0+4)
+      000061 C0 03            [24]  840 	push	(0+3)
+      000063 C0 02            [24]  841 	push	(0+2)
+      000065 C0 01            [24]  842 	push	(0+1)
+      000067 C0 00            [24]  843 	push	(0+0)
+      000069 C0 D0            [24]  844 	push	psw
+      00006B 75 D0 00         [24]  845 	mov	psw,#0x00
+                                    846 ;	main.c:188: if ((USB_INT_ST & MASK_UIS_TOKEN) == UIS_TOKEN_SOF)
+      00006E AE D9            [24]  847 	mov	r6,_USB_INT_ST
+      000070 53 06 30         [24]  848 	anl	ar6,#0x30
+      000073 7F 00            [12]  849 	mov	r7,#0x00
+      000075 BE 10 14         [24]  850 	cjne	r6,#0x10,00102$
+      000078 BF 00 11         [24]  851 	cjne	r7,#0x00,00102$
+                                    852 ;	main.c:190: sof_count++;
+      00007B 78r02            [12]  853 	mov	r0,#_sof_count
+      00007D 86 06            [24]  854 	mov	ar6,@r0
+      00007F 08               [12]  855 	inc	r0
+      000080 86 07            [24]  856 	mov	ar7,@r0
+      000082 78r02            [12]  857 	mov	r0,#_sof_count
+      000084 74 01            [12]  858 	mov	a,#0x01
+      000086 2E               [12]  859 	add	a,r6
+      000087 F6               [12]  860 	mov	@r0,a
+      000088 E4               [12]  861 	clr	a
+      000089 3F               [12]  862 	addc	a,r7
+      00008A 08               [12]  863 	inc	r0
+      00008B F6               [12]  864 	mov	@r0,a
+      00008C                        865 00102$:
+                                    866 ;	main.c:192: if (UIF_TRANSFER) //USB传输完成标志
+      00008C 20 D9 03         [24]  867 	jb	_UIF_TRANSFER,00507$
+      00008F 02r05r58         [24]  868 	ljmp	00222$
+      000092                        869 00507$:
+                                    870 ;	main.c:194: switch (USB_INT_ST & (MASK_UIS_TOKEN | MASK_UIS_ENDP))
+      000092 74 3F            [12]  871 	mov	a,#0x3f
+      000094 55 D9            [12]  872 	anl	a,_USB_INT_ST
+      000096 FF               [12]  873 	mov	r7,a
+      000097 FE               [12]  874 	mov	r6,a
+      000098 BE 00 03         [24]  875 	cjne	r6,#0x00,00508$
+      00009B 02r05r50         [24]  876 	ljmp	00218$
+      00009E                        877 00508$:
+      00009E BF 02 02         [24]  878 	cjne	r7,#0x02,00509$
+      0000A1 80 25            [24]  879 	sjmp	00104$
+      0000A3                        880 00509$:
+      0000A3 BF 20 03         [24]  881 	cjne	r7,#0x20,00510$
+      0000A6 02r04rD3         [24]  882 	ljmp	00211$
+      0000A9                        883 00510$:
+      0000A9 BF 21 02         [24]  884 	cjne	r7,#0x21,00511$
+      0000AC 80 08            [24]  885 	sjmp	00103$
+      0000AE                        886 00511$:
+      0000AE BF 30 02         [24]  887 	cjne	r7,#0x30,00512$
+      0000B1 80 2E            [24]  888 	sjmp	00107$
+      0000B3                        889 00512$:
+      0000B3 02r05r56         [24]  890 	ljmp	00220$
+                                    891 ;	main.c:196: case UIS_TOKEN_IN | 1: //endpoint 1
+      0000B6                        892 00103$:
+                                    893 ;	main.c:197: UEP1_T_LEN = 0;
+      0000B6 75 D3 00         [24]  894 	mov	_UEP1_T_LEN,#0x00
+                                    895 ;	main.c:198: UEP1_CTRL = UEP1_CTRL & ~MASK_UEP_T_RES | UEP_T_RES_NAK; //默认应答NAK
+      0000B9 74 FC            [12]  896 	mov	a,#0xfc
+      0000BB 55 D2            [12]  897 	anl	a,_UEP1_CTRL
+      0000BD 44 02            [12]  898 	orl	a,#0x02
+      0000BF F5 D2            [12]  899 	mov	_UEP1_CTRL,a
+                                    900 ;	main.c:199: ep1_in_busy = 0;
+      0000C1 78r04            [12]  901 	mov	r0,#_ep1_in_busy
+      0000C3 76 00            [12]  902 	mov	@r0,#0x00
+                                    903 ;	main.c:200: break;
+      0000C5 02r05r56         [24]  904 	ljmp	00220$
+                                    905 ;	main.c:201: case UIS_TOKEN_OUT | 2: //endpoint 2
+      0000C8                        906 00104$:
+                                    907 ;	main.c:203: if (U_TOG_OK) // 不同步的数据包将丢弃
+      0000C8 20 DE 03         [24]  908 	jb	_U_TOG_OK,00513$
+      0000CB 02r05r56         [24]  909 	ljmp	00220$
+      0000CE                        910 00513$:
+                                    911 ;	main.c:205: USBByteCount = USB_RX_LEN;
+      0000CE 78r00            [12]  912 	mov	r0,#_USBByteCount
+      0000D0 A6 DB            [24]  913 	mov	@r0,_USB_RX_LEN
+                                    914 ;	main.c:206: USBBufOutPoint = 0;										 //取数据指针复位
+      0000D2 78r01            [12]  915 	mov	r0,#_USBBufOutPoint
+      0000D4 76 00            [12]  916 	mov	@r0,#0x00
+                                    917 ;	main.c:207: UEP2_CTRL = UEP2_CTRL & ~MASK_UEP_R_RES | UEP_R_RES_NAK; //收到一包数据就NAK，主函数处理完，由主函数修改响应方式
+      0000D6 74 F3            [12]  918 	mov	a,#0xf3
+      0000D8 55 D4            [12]  919 	anl	a,_UEP2_CTRL
+      0000DA 44 08            [12]  920 	orl	a,#0x08
+      0000DC F5 D4            [12]  921 	mov	_UEP2_CTRL,a
+                                    922 ;	main.c:209: break;
+      0000DE 02r05r56         [24]  923 	ljmp	00220$
+                                    924 ;	main.c:212: case UIS_TOKEN_SETUP | 0: //SETUP事务
+      0000E1                        925 00107$:
+                                    926 ;	main.c:213: len = USB_RX_LEN;
+      0000E1 AE DB            [24]  927 	mov	r6,_USB_RX_LEN
+      0000E3 7F 00            [12]  928 	mov	r7,#0x00
+                                    929 ;	main.c:214: if (len == (sizeof(USB_SETUP_REQ)))
+      0000E5 BE 08 05         [24]  930 	cjne	r6,#0x08,00514$
+      0000E8 BF 00 02         [24]  931 	cjne	r7,#0x00,00514$
+      0000EB 80 03            [24]  932 	sjmp	00515$
+      0000ED                        933 00514$:
+      0000ED 02r04rA7         [24]  934 	ljmp	00203$
+      0000F0                        935 00515$:
+                                    936 ;	main.c:217: SetupLen = ((uint16_t)UsbSetupBuf->wLengthH << 8) | (UsbSetupBuf->wLengthL);
+      0000F0 90 01 07         [24]  937 	mov	dptr,#(_Ep0Buffer + 0x0007)
+      0000F3 E0               [24]  938 	movx	a,@dptr
+      0000F4 FE               [12]  939 	mov	r6,a
+      0000F5 7F 00            [12]  940 	mov	r7,#0x00
+      0000F7 90 01 06         [24]  941 	mov	dptr,#(_Ep0Buffer + 0x0006)
+      0000FA E0               [24]  942 	movx	a,@dptr
+      0000FB 7C 00            [12]  943 	mov	r4,#0x00
+      0000FD 4F               [12]  944 	orl	a,r7
+      0000FE F5*00            [12]  945 	mov	_SetupLen,a
+      000100 EC               [12]  946 	mov	a,r4
+      000101 4E               [12]  947 	orl	a,r6
+      000102 F5*01            [12]  948 	mov	(_SetupLen + 1),a
+                                    949 ;	main.c:218: len = 0;			// 默认为成功并且上传0长度
+      000104 7E 00            [12]  950 	mov	r6,#0x00
+      000106 7F 00            [12]  951 	mov	r7,#0x00
+                                    952 ;	main.c:219: vendor_control = 0; //默认非vendor
+                                    953 ;	1-genFromRTrack replaced	mov	_vendor_control,#0x00
+      000108 8F*05            [24]  954 	mov	_vendor_control,r7
+                                    955 ;	main.c:220: SetupReq = UsbSetupBuf->bRequest;
+      00010A 90 01 01         [24]  956 	mov	dptr,#(_Ep0Buffer + 0x0001)
+      00010D E0               [24]  957 	movx	a,@dptr
+      00010E F5*02            [12]  958 	mov	_SetupReq,a
+                                    959 ;	main.c:221: if ((UsbSetupBuf->bRequestType & USB_REQ_TYP_MASK) == USB_REQ_TYP_VENDOR)
+      000110 90 01 00         [24]  960 	mov	dptr,#_Ep0Buffer
+      000113 E0               [24]  961 	movx	a,@dptr
+      000114 FD               [12]  962 	mov	r5,a
+      000115 53 05 60         [24]  963 	anl	ar5,#0x60
+      000118 7C 00            [12]  964 	mov	r4,#0x00
+      00011A BD 40 05         [24]  965 	cjne	r5,#0x40,00516$
+      00011D BC 00 02         [24]  966 	cjne	r4,#0x00,00516$
+      000120 80 03            [24]  967 	sjmp	00517$
+      000122                        968 00516$:
+      000122 02r01rC2         [24]  969 	ljmp	00200$
+      000125                        970 00517$:
+                                    971 ;	main.c:223: vendor_control = 1;
+      000125 75*05 01         [24]  972 	mov	_vendor_control,#0x01
+                                    973 ;	main.c:224: if (SetupLen == 0)
+      000128 E5*00            [12]  974 	mov	a,_SetupLen
+      00012A 45*01            [12]  975 	orl	a,(_SetupLen + 1)
+      00012C 70 22            [24]  976 	jnz	00121$
+                                    977 ;	main.c:227: switch (SetupReq)
+      00012E E5*02            [12]  978 	mov	a,_SetupReq
+      000130 24 FB            [12]  979 	add	a,#0xff - 0x04
+      000132 50 03            [24]  980 	jnc	00519$
+      000134 02r04rAB         [24]  981 	ljmp	00204$
+      000137                        982 00519$:
+      000137 E5*02            [12]  983 	mov	a,_SetupReq
+      000139 75 F0 03         [24]  984 	mov	b,#0x03
+      00013C A4               [48]  985 	mul	ab
+      00013D 90r01r41         [24]  986 	mov	dptr,#00520$
+      000140 73               [24]  987 	jmp	@a+dptr
+      000141                        988 00520$:
+      000141 02r04rAB         [24]  989 	ljmp	00204$
+      000144 02r04rAB         [24]  990 	ljmp	00204$
+      000147 02r04rAB         [24]  991 	ljmp	00204$
+      00014A 02r04rAB         [24]  992 	ljmp	00204$
+      00014D 02r04rAB         [24]  993 	ljmp	00204$
+                                    994 ;	main.c:241: }
+      000150                        995 00121$:
+                                    996 ;	main.c:246: switch (SetupReq)
+      000150 74 05            [12]  997 	mov	a,#0x05
+      000152 B5*02 02         [24]  998 	cjne	a,_SetupReq,00521$
+      000155 80 3A            [24]  999 	sjmp	00116$
+      000157                       1000 00521$:
+      000157 74 09            [12] 1001 	mov	a,#0x09
+      000159 B5*02 02         [24] 1002 	cjne	a,_SetupReq,00522$
+      00015C 80 46            [24] 1003 	sjmp	00117$
+      00015E                       1004 00522$:
+      00015E 74 90            [12] 1005 	mov	a,#0x90
+      000160 B5*02 4F         [24] 1006 	cjne	a,_SetupReq,00118$
+                                   1007 ;	main.c:249: addr = UsbSetupBuf->wIndexL << 1; //((req->wIndex >> 8) & 0x3F) << 1;
+      000163 90 01 04         [24] 1008 	mov	dptr,#(_Ep0Buffer + 0x0004)
+      000166 E0               [24] 1009 	movx	a,@dptr
+                                   1010 ;	main.c:250: Ep0Buffer[0] = ftdi_rom[addr];
+      000167 25 E0            [12] 1011 	add	a,acc
+      000169 FD               [12] 1012 	mov	r5,a
+      00016A 90r00r00         [24] 1013 	mov	dptr,#_ftdi_rom
+      00016D 93               [24] 1014 	movc	a,@a+dptr
+      00016E 90 01 00         [24] 1015 	mov	dptr,#_Ep0Buffer
+      000171 F0               [24] 1016 	movx	@dptr,a
+                                   1017 ;	main.c:251: Ep0Buffer[1] = ftdi_rom[addr + 1];
+      000172 7C 00            [12] 1018 	mov	r4,#0x00
+      000174 0D               [12] 1019 	inc	r5
+      000175 BD 00 01         [24] 1020 	cjne	r5,#0x00,00525$
+      000178 0C               [12] 1021 	inc	r4
+      000179                       1022 00525$:
+      000179 ED               [12] 1023 	mov	a,r5
+      00017A 24r00            [12] 1024 	add	a,#_ftdi_rom
+      00017C F5 82            [12] 1025 	mov	dpl,a
+      00017E EC               [12] 1026 	mov	a,r4
+      00017F 34s00            [12] 1027 	addc	a,#(_ftdi_rom >> 8)
+      000181 F5 83            [12] 1028 	mov	dph,a
+      000183 E4               [12] 1029 	clr	a
+      000184 93               [24] 1030 	movc	a,@a+dptr
+      000185 FD               [12] 1031 	mov	r5,a
+      000186 90 01 01         [24] 1032 	mov	dptr,#(_Ep0Buffer + 0x0001)
+      000189 F0               [24] 1033 	movx	@dptr,a
+                                   1034 ;	main.c:252: len = 2;
+      00018A 7E 02            [12] 1035 	mov	r6,#0x02
+      00018C 7F 00            [12] 1036 	mov	r7,#0x00
+                                   1037 ;	main.c:253: break;
+      00018E 02r04rAB         [24] 1038 	ljmp	00204$
+                                   1039 ;	main.c:254: case FTDI_VEN_REQ_GET_MODEM_STA:
+      000191                       1040 00116$:
+                                   1041 ;	main.c:256: Ep0Buffer[0] = FTDI_MODEM_STA_DUMMY0;
+      000191 90 01 00         [24] 1042 	mov	dptr,#_Ep0Buffer
+      000194 74 01            [12] 1043 	mov	a,#0x01
+      000196 F0               [24] 1044 	movx	@dptr,a
+                                   1045 ;	main.c:257: Ep0Buffer[1] = FTDI_MODEM_STA_DUMMY1;
+      000197 90 01 01         [24] 1046 	mov	dptr,#(_Ep0Buffer + 0x0001)
+      00019A 74 60            [12] 1047 	mov	a,#0x60
+      00019C F0               [24] 1048 	movx	@dptr,a
+                                   1049 ;	main.c:258: len = 2;
+      00019D 7E 02            [12] 1050 	mov	r6,#0x02
+      00019F 7F 00            [12] 1051 	mov	r7,#0x00
+                                   1052 ;	main.c:259: break;
+      0001A1 02r04rAB         [24] 1053 	ljmp	00204$
+                                   1054 ;	main.c:260: case FTDI_VEN_REQ_SET_LAT_TIMER:
+      0001A4                       1055 00117$:
+                                   1056 ;	main.c:261: latency_timer = UsbSetupBuf->wValueL;
+      0001A4 90 01 02         [24] 1057 	mov	dptr,#(_Ep0Buffer + 0x0002)
+      0001A7 78r05            [12] 1058 	mov	r0,#_latency_timer
+      0001A9 E0               [24] 1059 	movx	a,@dptr
+      0001AA F6               [12] 1060 	mov	@r0,a
+                                   1061 ;	main.c:262: len = 0;
+      0001AB 7E 00            [12] 1062 	mov	r6,#0x00
+      0001AD 7F 00            [12] 1063 	mov	r7,#0x00
+                                   1064 ;	main.c:263: break;
+      0001AF 02r04rAB         [24] 1065 	ljmp	00204$
+                                   1066 ;	main.c:264: default:
+      0001B2                       1067 00118$:
+                                   1068 ;	main.c:266: Ep0Buffer[0] = 0x0;
+      0001B2 90 01 00         [24] 1069 	mov	dptr,#_Ep0Buffer
+      0001B5 E4               [12] 1070 	clr	a
+      0001B6 F0               [24] 1071 	movx	@dptr,a
+                                   1072 ;	main.c:267: Ep0Buffer[1] = 0x0;
+      0001B7 90 01 01         [24] 1073 	mov	dptr,#(_Ep0Buffer + 0x0001)
+      0001BA F0               [24] 1074 	movx	@dptr,a
+                                   1075 ;	main.c:268: len = 2;
+      0001BB 7E 02            [12] 1076 	mov	r6,#0x02
+      0001BD 7F 00            [12] 1077 	mov	r7,#0x00
+                                   1078 ;	main.c:270: }
+      0001BF 02r04rAB         [24] 1079 	ljmp	00204$
+      0001C2                       1080 00200$:
+                                   1081 ;	main.c:273: else if ((UsbSetupBuf->bRequestType & USB_REQ_TYP_MASK) == USB_REQ_TYP_STANDARD)
+      0001C2 90 01 00         [24] 1082 	mov	dptr,#_Ep0Buffer
+      0001C5 E0               [24] 1083 	movx	a,@dptr
+      0001C6 FD               [12] 1084 	mov	r5,a
+      0001C7 54 60            [12] 1085 	anl	a,#0x60
+      0001C9 60 03            [24] 1086 	jz	00527$
+      0001CB 02r04rA1         [24] 1087 	ljmp	00194$
+      0001CE                       1088 00527$:
+                                   1089 ;	main.c:275: switch (SetupReq) //请求码
+      0001CE E5*02            [12] 1090 	mov	a,_SetupReq
+      0001D0 24 F5            [12] 1091 	add	a,#0xff - 0x0a
+      0001D2 50 03            [24] 1092 	jnc	00528$
+      0001D4 02r04r9B         [24] 1093 	ljmp	00192$
+      0001D7                       1094 00528$:
+      0001D7 E5*02            [12] 1095 	mov	a,_SetupReq
+      0001D9 75 F0 03         [24] 1096 	mov	b,#0x03
+      0001DC A4               [48] 1097 	mul	ab
+      0001DD 90r01rE1         [24] 1098 	mov	dptr,#00529$
+      0001E0 73               [24] 1099 	jmp	@a+dptr
+      0001E1                       1100 00529$:
+      0001E1 02r04r7B         [24] 1101 	ljmp	00188$
+      0001E4 02r03r17         [24] 1102 	ljmp	00146$
+      0001E7 02r04r9B         [24] 1103 	ljmp	00192$
+      0001EA 02r03r92         [24] 1104 	ljmp	00163$
+      0001ED 02r04r9B         [24] 1105 	ljmp	00192$
+      0001F0 02r02rE6         [24] 1106 	ljmp	00140$
+      0001F3 02r02r02         [24] 1107 	ljmp	00123$
+      0001F6 02r04r9B         [24] 1108 	ljmp	00192$
+      0001F9 02r02rF3         [24] 1109 	ljmp	00141$
+      0001FC 02r03r0E         [24] 1110 	ljmp	00144$
+      0001FF 02r04rAB         [24] 1111 	ljmp	00204$
+                                   1112 ;	main.c:277: case USB_GET_DESCRIPTOR:
+      000202                       1113 00123$:
+                                   1114 ;	main.c:278: switch (UsbSetupBuf->wValueH)
+      000202 90 01 03         [24] 1115 	mov	dptr,#(_Ep0Buffer + 0x0003)
+      000205 E0               [24] 1116 	movx	a,@dptr
+      000206 FD               [12] 1117 	mov	r5,a
+      000207 BD 01 02         [24] 1118 	cjne	r5,#0x01,00530$
+      00020A 80 0A            [24] 1119 	sjmp	00124$
+      00020C                       1120 00530$:
+      00020C BD 02 02         [24] 1121 	cjne	r5,#0x02,00531$
+      00020F 80 14            [24] 1122 	sjmp	00125$
+      000211                       1123 00531$:
+                                   1124 ;	main.c:280: case 1:				  //设备描述符
+      000211 BD 03 72         [24] 1125 	cjne	r5,#0x03,00136$
+      000214 80 1E            [24] 1126 	sjmp	00126$
+      000216                       1127 00124$:
+                                   1128 ;	main.c:281: pDescr = DevDesc; //把设备描述符送到要发送的缓冲区
+      000216 75*07r80         [24] 1129 	mov	_pDescr,#_DevDesc
+      000219 75*08s00         [24] 1130 	mov	(_pDescr + 1),#(_DevDesc >> 8)
+      00021C 75*09 80         [24] 1131 	mov	(_pDescr + 2),#0x80
+                                   1132 ;	main.c:282: len = sizeof(DevDesc);
+      00021F 7C 12            [12] 1133 	mov	r4,#0x12
+      000221 7D 00            [12] 1134 	mov	r5,#0x00
+                                   1135 ;	main.c:283: break;
+                                   1136 ;	main.c:284: case 2:				  //配置描述符
+      000223 80 65            [24] 1137 	sjmp	00137$
+      000225                       1138 00125$:
+                                   1139 ;	main.c:285: pDescr = CfgDesc; //把设备描述符送到要发送的缓冲区
+      000225 75*07r92         [24] 1140 	mov	_pDescr,#_CfgDesc
+      000228 75*08s00         [24] 1141 	mov	(_pDescr + 1),#(_CfgDesc >> 8)
+      00022B 75*09 80         [24] 1142 	mov	(_pDescr + 2),#0x80
+                                   1143 ;	main.c:286: len = sizeof(CfgDesc);
+      00022E 7C 20            [12] 1144 	mov	r4,#0x20
+      000230 7D 00            [12] 1145 	mov	r5,#0x00
+                                   1146 ;	main.c:287: break;
+                                   1147 ;	main.c:288: case 3:
+      000232 80 56            [24] 1148 	sjmp	00137$
+      000234                       1149 00126$:
+                                   1150 ;	main.c:289: if (UsbSetupBuf->wValueL == 0)
+      000234 90 01 02         [24] 1151 	mov	dptr,#(_Ep0Buffer + 0x0002)
+      000237 E0               [24] 1152 	movx	a,@dptr
+      000238 70 0F            [24] 1153 	jnz	00134$
+                                   1154 ;	main.c:291: pDescr = LangDes;
+      00023A 75*07rB2         [24] 1155 	mov	_pDescr,#_LangDes
+      00023D 75*08s00         [24] 1156 	mov	(_pDescr + 1),#(_LangDes >> 8)
+      000240 75*09 80         [24] 1157 	mov	(_pDescr + 2),#0x80
+                                   1158 ;	main.c:292: len = sizeof(LangDes);
+      000243 7C 04            [12] 1159 	mov	r4,#0x04
+      000245 7D 00            [12] 1160 	mov	r5,#0x00
+      000247 80 41            [24] 1161 	sjmp	00137$
+      000249                       1162 00134$:
+                                   1163 ;	main.c:294: else if (UsbSetupBuf->wValueL == 1)
+      000249 90 01 02         [24] 1164 	mov	dptr,#(_Ep0Buffer + 0x0002)
+      00024C E0               [24] 1165 	movx	a,@dptr
+      00024D FB               [12] 1166 	mov	r3,a
+      00024E BB 01 0F         [24] 1167 	cjne	r3,#0x01,00131$
+                                   1168 ;	main.c:296: pDescr = Manuf_Des;
+      000251 75*07rE0         [24] 1169 	mov	_pDescr,#_Manuf_Des
+      000254 75*08s00         [24] 1170 	mov	(_pDescr + 1),#(_Manuf_Des >> 8)
+      000257 75*09 80         [24] 1171 	mov	(_pDescr + 2),#0x80
+                                   1172 ;	main.c:297: len = sizeof(Manuf_Des);
+      00025A 7C 0E            [12] 1173 	mov	r4,#0x0e
+      00025C 7D 00            [12] 1174 	mov	r5,#0x00
+      00025E 80 2A            [24] 1175 	sjmp	00137$
+      000260                       1176 00131$:
+                                   1177 ;	main.c:299: else if (UsbSetupBuf->wValueL == 2)
+      000260 90 01 02         [24] 1178 	mov	dptr,#(_Ep0Buffer + 0x0002)
+      000263 E0               [24] 1179 	movx	a,@dptr
+      000264 FB               [12] 1180 	mov	r3,a
+      000265 BB 02 0F         [24] 1181 	cjne	r3,#0x02,00128$
+                                   1182 ;	main.c:301: pDescr = Prod_Des;
+      000268 75*07rC8         [24] 1183 	mov	_pDescr,#_Prod_Des
+      00026B 75*08s00         [24] 1184 	mov	(_pDescr + 1),#(_Prod_Des >> 8)
+      00026E 75*09 80         [24] 1185 	mov	(_pDescr + 2),#0x80
+                                   1186 ;	main.c:302: len = sizeof(Prod_Des);
+      000271 7C 18            [12] 1187 	mov	r4,#0x18
+      000273 7D 00            [12] 1188 	mov	r5,#0x00
+      000275 80 13            [24] 1189 	sjmp	00137$
+      000277                       1190 00128$:
+                                   1191 ;	main.c:306: pDescr = SerDes;
+      000277 75*07rB6         [24] 1192 	mov	_pDescr,#_SerDes
+      00027A 75*08s00         [24] 1193 	mov	(_pDescr + 1),#(_SerDes >> 8)
+      00027D 75*09 80         [24] 1194 	mov	(_pDescr + 2),#0x80
+                                   1195 ;	main.c:307: len = sizeof(SerDes);
+      000280 7C 12            [12] 1196 	mov	r4,#0x12
+      000282 7D 00            [12] 1197 	mov	r5,#0x00
+                                   1198 ;	main.c:309: break;
+                                   1199 ;	main.c:310: default:
+      000284 80 04            [24] 1200 	sjmp	00137$
+      000286                       1201 00136$:
+                                   1202 ;	main.c:311: len = 0xff; //不支持的命令或者出错
+      000286 7C FF            [12] 1203 	mov	r4,#0xff
+      000288 7D 00            [12] 1204 	mov	r5,#0x00
+                                   1205 ;	main.c:313: }
+      00028A                       1206 00137$:
+                                   1207 ;	main.c:314: if (SetupLen > len)
+      00028A C3               [12] 1208 	clr	c
+      00028B EC               [12] 1209 	mov	a,r4
+      00028C 95*00            [12] 1210 	subb	a,_SetupLen
+      00028E ED               [12] 1211 	mov	a,r5
+      00028F 95*01            [12] 1212 	subb	a,(_SetupLen + 1)
+      000291 50 04            [24] 1213 	jnc	00139$
+                                   1214 ;	main.c:316: SetupLen = len; //限制总长度
+      000293 8C*00            [24] 1215 	mov	_SetupLen,r4
+      000295 8D*01            [24] 1216 	mov	(_SetupLen + 1),r5
+      000297                       1217 00139$:
+                                   1218 ;	main.c:318: len = SetupLen >= DEFAULT_ENDP0_SIZE ? DEFAULT_ENDP0_SIZE : SetupLen; //本次传输长度
+      000297 C3               [12] 1219 	clr	c
+      000298 E5*00            [12] 1220 	mov	a,_SetupLen
+      00029A 94 08            [12] 1221 	subb	a,#0x08
+      00029C E5*01            [12] 1222 	mov	a,(_SetupLen + 1)
+      00029E 94 00            [12] 1223 	subb	a,#0x00
+      0002A0 40 06            [24] 1224 	jc	00235$
+      0002A2 7C 08            [12] 1225 	mov	r4,#0x08
+      0002A4 7D 00            [12] 1226 	mov	r5,#0x00
+      0002A6 80 04            [24] 1227 	sjmp	00236$
+      0002A8                       1228 00235$:
+      0002A8 AC*00            [24] 1229 	mov	r4,_SetupLen
+      0002AA AD*01            [24] 1230 	mov	r5,(_SetupLen + 1)
+      0002AC                       1231 00236$:
+      0002AC 8C 06            [24] 1232 	mov	ar6,r4
+      0002AE 8D 07            [24] 1233 	mov	ar7,r5
+                                   1234 ;	main.c:319: memcpy(Ep0Buffer, pDescr, len);										  //加载上传数据
+      0002B0 85*07*00         [24] 1235 	mov	___memcpy_PARM_2,_pDescr
+      0002B3 85*08*01         [24] 1236 	mov	(___memcpy_PARM_2 + 1),(_pDescr + 1)
+      0002B6 85*09*02         [24] 1237 	mov	(___memcpy_PARM_2 + 2),(_pDescr + 2)
+      0002B9 8E*00            [24] 1238 	mov	___memcpy_PARM_3,r6
+      0002BB 8F*01            [24] 1239 	mov	(___memcpy_PARM_3 + 1),r7
+      0002BD 90 01 00         [24] 1240 	mov	dptr,#_Ep0Buffer
+      0002C0 75 F0 00         [24] 1241 	mov	b,#0x00
+      0002C3 C0 07            [24] 1242 	push	ar7
+      0002C5 C0 06            [24] 1243 	push	ar6
+      0002C7 12r00r00         [24] 1244 	lcall	___memcpy
+      0002CA D0 06            [24] 1245 	pop	ar6
+      0002CC D0 07            [24] 1246 	pop	ar7
+                                   1247 ;	main.c:320: SetupLen -= len;
+      0002CE E5*00            [12] 1248 	mov	a,_SetupLen
+      0002D0 C3               [12] 1249 	clr	c
+      0002D1 9E               [12] 1250 	subb	a,r6
+      0002D2 F5*00            [12] 1251 	mov	_SetupLen,a
+      0002D4 E5*01            [12] 1252 	mov	a,(_SetupLen + 1)
+      0002D6 9F               [12] 1253 	subb	a,r7
+      0002D7 F5*01            [12] 1254 	mov	(_SetupLen + 1),a
+                                   1255 ;	main.c:321: pDescr += len;
+      0002D9 EE               [12] 1256 	mov	a,r6
+      0002DA 25*07            [12] 1257 	add	a,_pDescr
+      0002DC F5*07            [12] 1258 	mov	_pDescr,a
+      0002DE EF               [12] 1259 	mov	a,r7
+      0002DF 35*08            [12] 1260 	addc	a,(_pDescr + 1)
+      0002E1 F5*08            [12] 1261 	mov	(_pDescr + 1),a
+                                   1262 ;	main.c:322: break;
+      0002E3 02r04rAB         [24] 1263 	ljmp	00204$
+                                   1264 ;	main.c:323: case USB_SET_ADDRESS:
+      0002E6                       1265 00140$:
+                                   1266 ;	main.c:324: SetupLen = UsbSetupBuf->wValueL; //暂存USB设备地址
+      0002E6 90 01 02         [24] 1267 	mov	dptr,#(_Ep0Buffer + 0x0002)
+      0002E9 E0               [24] 1268 	movx	a,@dptr
+      0002EA FD               [12] 1269 	mov	r5,a
+      0002EB 8D*00            [24] 1270 	mov	_SetupLen,r5
+      0002ED 75*01 00         [24] 1271 	mov	(_SetupLen + 1),#0x00
+                                   1272 ;	main.c:325: break;
+      0002F0 02r04rAB         [24] 1273 	ljmp	00204$
+                                   1274 ;	main.c:326: case USB_GET_CONFIGURATION:
+      0002F3                       1275 00141$:
+                                   1276 ;	main.c:327: Ep0Buffer[0] = UsbConfig;
+      0002F3 90 01 00         [24] 1277 	mov	dptr,#_Ep0Buffer
+      0002F6 E5*04            [12] 1278 	mov	a,_UsbConfig
+      0002F8 F0               [24] 1279 	movx	@dptr,a
+                                   1280 ;	main.c:328: if (SetupLen >= 1)
+      0002F9 C3               [12] 1281 	clr	c
+      0002FA E5*00            [12] 1282 	mov	a,_SetupLen
+      0002FC 94 01            [12] 1283 	subb	a,#0x01
+      0002FE E5*01            [12] 1284 	mov	a,(_SetupLen + 1)
+      000300 94 00            [12] 1285 	subb	a,#0x00
+      000302 50 03            [24] 1286 	jnc	00540$
+      000304 02r04rAB         [24] 1287 	ljmp	00204$
+      000307                       1288 00540$:
+                                   1289 ;	main.c:330: len = 1;
+      000307 7E 01            [12] 1290 	mov	r6,#0x01
+      000309 7F 00            [12] 1291 	mov	r7,#0x00
+                                   1292 ;	main.c:332: break;
+      00030B 02r04rAB         [24] 1293 	ljmp	00204$
+                                   1294 ;	main.c:333: case USB_SET_CONFIGURATION:
+      00030E                       1295 00144$:
+                                   1296 ;	main.c:334: UsbConfig = UsbSetupBuf->wValueL;
+      00030E 90 01 02         [24] 1297 	mov	dptr,#(_Ep0Buffer + 0x0002)
+      000311 E0               [24] 1298 	movx	a,@dptr
+      000312 F5*04            [12] 1299 	mov	_UsbConfig,a
+                                   1300 ;	main.c:335: break;
+      000314 02r04rAB         [24] 1301 	ljmp	00204$
+                                   1302 ;	main.c:338: case USB_CLEAR_FEATURE:												//Clear Feature
+      000317                       1303 00146$:
+                                   1304 ;	main.c:339: if ((UsbSetupBuf->bRequestType & 0x1F) == USB_REQ_RECIP_DEVICE) /* 清除设备 */
+      000317 90 01 00         [24] 1305 	mov	dptr,#_Ep0Buffer
+      00031A E0               [24] 1306 	movx	a,@dptr
+      00031B 54 1F            [12] 1307 	anl	a,#0x1f
+      00031D 70 33            [24] 1308 	jnz	00161$
+                                   1309 ;	main.c:341: if ((((uint16_t)UsbSetupBuf->wValueH << 8) | UsbSetupBuf->wValueL) == 0x01)
+      00031F 90 01 03         [24] 1310 	mov	dptr,#(_Ep0Buffer + 0x0003)
+      000322 E0               [24] 1311 	movx	a,@dptr
+      000323 FC               [12] 1312 	mov	r4,a
+      000324 7D 00            [12] 1313 	mov	r5,#0x00
+      000326 90 01 02         [24] 1314 	mov	dptr,#(_Ep0Buffer + 0x0002)
+      000329 E0               [24] 1315 	movx	a,@dptr
+      00032A FB               [12] 1316 	mov	r3,a
+      00032B 7A 00            [12] 1317 	mov	r2,#0x00
+      00032D 42 05            [12] 1318 	orl	ar5,a
+      00032F EA               [12] 1319 	mov	a,r2
+      000330 42 04            [12] 1320 	orl	ar4,a
+      000332 BD 01 16         [24] 1321 	cjne	r5,#0x01,00151$
+      000335 BC 00 13         [24] 1322 	cjne	r4,#0x00,00151$
+                                   1323 ;	main.c:343: if (CfgDesc[7] & 0x20)
+      000338 90r00r99         [24] 1324 	mov	dptr,#(_CfgDesc + 0x0007)
+      00033B E4               [12] 1325 	clr	a
+      00033C 93               [24] 1326 	movc	a,@a+dptr
+      00033D FD               [12] 1327 	mov	r5,a
+      00033E 30 E5 03         [24] 1328 	jnb	acc.5,00545$
+      000341 02r04rAB         [24] 1329 	ljmp	00204$
+      000344                       1330 00545$:
+                                   1331 ;	main.c:349: len = 0xFF; /* 操作失败 */
+      000344 7E FF            [12] 1332 	mov	r6,#0xff
+      000346 7F 00            [12] 1333 	mov	r7,#0x00
+      000348 02r04rAB         [24] 1334 	ljmp	00204$
+      00034B                       1335 00151$:
+                                   1336 ;	main.c:354: len = 0xFF; /* 操作失败 */
+      00034B 7E FF            [12] 1337 	mov	r6,#0xff
+      00034D 7F 00            [12] 1338 	mov	r7,#0x00
+      00034F 02r04rAB         [24] 1339 	ljmp	00204$
+      000352                       1340 00161$:
+                                   1341 ;	main.c:357: else if ((UsbSetupBuf->bRequestType & USB_REQ_RECIP_MASK) == USB_REQ_RECIP_ENDP) // 端点
+      000352 90 01 00         [24] 1342 	mov	dptr,#_Ep0Buffer
+      000355 E0               [24] 1343 	movx	a,@dptr
+      000356 FD               [12] 1344 	mov	r5,a
+      000357 53 05 1F         [24] 1345 	anl	ar5,#0x1f
+      00035A 7C 00            [12] 1346 	mov	r4,#0x00
+      00035C BD 02 2C         [24] 1347 	cjne	r5,#0x02,00158$
+      00035F BC 00 29         [24] 1348 	cjne	r4,#0x00,00158$
+                                   1349 ;	main.c:359: switch (UsbSetupBuf->wIndexL)
+      000362 90 01 04         [24] 1350 	mov	dptr,#(_Ep0Buffer + 0x0004)
+      000365 E0               [24] 1351 	movx	a,@dptr
+      000366 FD               [12] 1352 	mov	r5,a
+      000367 BD 02 02         [24] 1353 	cjne	r5,#0x02,00548$
+      00036A 80 05            [24] 1354 	sjmp	00153$
+      00036C                       1355 00548$:
+                                   1356 ;	main.c:361: case 0x02:
+      00036C BD 81 11         [24] 1357 	cjne	r5,#0x81,00155$
+      00036F 80 05            [24] 1358 	sjmp	00154$
+      000371                       1359 00153$:
+                                   1360 ;	main.c:362: UEP2_CTRL = UEP2_CTRL & ~(bUEP_R_TOG | MASK_UEP_R_RES) | UEP_R_RES_ACK;
+      000371 53 D4 73         [24] 1361 	anl	_UEP2_CTRL,#0x73
+                                   1362 ;	main.c:363: break;
+                                   1363 ;	main.c:364: case 0x81:
+      000374 80 0E            [24] 1364 	sjmp	00156$
+      000376                       1365 00154$:
+                                   1366 ;	main.c:365: UEP1_CTRL = UEP1_CTRL & ~(bUEP_T_TOG | MASK_UEP_T_RES) | UEP_T_RES_NAK;
+      000376 74 BC            [12] 1367 	mov	a,#0xbc
+      000378 55 D2            [12] 1368 	anl	a,_UEP1_CTRL
+      00037A 44 02            [12] 1369 	orl	a,#0x02
+      00037C F5 D2            [12] 1370 	mov	_UEP1_CTRL,a
+                                   1371 ;	main.c:366: break;
+                                   1372 ;	main.c:367: default:
+      00037E 80 04            [24] 1373 	sjmp	00156$
+      000380                       1374 00155$:
+                                   1375 ;	main.c:368: len = 0xFF; // 不支持的端点
+      000380 7E FF            [12] 1376 	mov	r6,#0xff
+      000382 7F 00            [12] 1377 	mov	r7,#0x00
+                                   1378 ;	main.c:370: }
+      000384                       1379 00156$:
+                                   1380 ;	main.c:371: ep1_in_busy = 0;
+      000384 78r04            [12] 1381 	mov	r0,#_ep1_in_busy
+      000386 76 00            [12] 1382 	mov	@r0,#0x00
+      000388 02r04rAB         [24] 1383 	ljmp	00204$
+      00038B                       1384 00158$:
+                                   1385 ;	main.c:375: len = 0xFF; // 不是端点不支持
+      00038B 7E FF            [12] 1386 	mov	r6,#0xff
+      00038D 7F 00            [12] 1387 	mov	r7,#0x00
+                                   1388 ;	main.c:377: break;
+      00038F 02r04rAB         [24] 1389 	ljmp	00204$
+                                   1390 ;	main.c:378: case USB_SET_FEATURE:												/* Set Feature */
+      000392                       1391 00163$:
+                                   1392 ;	main.c:379: if ((UsbSetupBuf->bRequestType & 0x1F) == USB_REQ_RECIP_DEVICE) /* 设置设备 */
+      000392 90 01 00         [24] 1393 	mov	dptr,#_Ep0Buffer
+      000395 E0               [24] 1394 	movx	a,@dptr
+      000396 54 1F            [12] 1395 	anl	a,#0x1f
+      000398 70 4D            [24] 1396 	jnz	00186$
+                                   1397 ;	main.c:381: if ((((uint16_t)UsbSetupBuf->wValueH << 8) | UsbSetupBuf->wValueL) == 0x01)
+      00039A 90 01 03         [24] 1398 	mov	dptr,#(_Ep0Buffer + 0x0003)
+      00039D E0               [24] 1399 	movx	a,@dptr
+      00039E FC               [12] 1400 	mov	r4,a
+      00039F 7D 00            [12] 1401 	mov	r5,#0x00
+      0003A1 90 01 02         [24] 1402 	mov	dptr,#(_Ep0Buffer + 0x0002)
+      0003A4 E0               [24] 1403 	movx	a,@dptr
+      0003A5 FB               [12] 1404 	mov	r3,a
+      0003A6 7A 00            [12] 1405 	mov	r2,#0x00
+      0003A8 42 05            [12] 1406 	orl	ar5,a
+      0003AA EA               [12] 1407 	mov	a,r2
+      0003AB 42 04            [12] 1408 	orl	ar4,a
+      0003AD BD 01 30         [24] 1409 	cjne	r5,#0x01,00171$
+      0003B0 BC 00 2D         [24] 1410 	cjne	r4,#0x00,00171$
+                                   1411 ;	main.c:383: if (CfgDesc[7] & 0x20)
+      0003B3 90r00r99         [24] 1412 	mov	dptr,#(_CfgDesc + 0x0007)
+      0003B6 E4               [12] 1413 	clr	a
+      0003B7 93               [24] 1414 	movc	a,@a+dptr
+      0003B8 FD               [12] 1415 	mov	r5,a
+      0003B9 30 E5 1D         [24] 1416 	jnb	acc.5,00168$
+                                   1417 ;	main.c:389: while (XBUS_AUX & bUART0_TX)
+      0003BC                       1418 00164$:
+      0003BC E5 A2            [12] 1419 	mov	a,_XBUS_AUX
+      0003BE 20 E7 FB         [24] 1420 	jb	acc.7,00164$
+                                   1421 ;	main.c:393: SAFE_MOD = 0x55;
+      0003C1 75 A1 55         [24] 1422 	mov	_SAFE_MOD,#0x55
+                                   1423 ;	main.c:394: SAFE_MOD = 0xAA;
+      0003C4 75 A1 AA         [24] 1424 	mov	_SAFE_MOD,#0xaa
+                                   1425 ;	main.c:395: WAKE_CTRL = bWAK_BY_USB | bWAK_RXD0_LO | bWAK_RXD1_LO; //USB或者RXD0/1有信号时可被唤醒
+      0003C7 75 A9 C1         [24] 1426 	mov	_WAKE_CTRL,#0xc1
+                                   1427 ;	main.c:396: PCON |= PD;											   //睡眠
+      0003CA 43 87 02         [24] 1428 	orl	_PCON,#0x02
+                                   1429 ;	main.c:397: SAFE_MOD = 0x55;
+      0003CD 75 A1 55         [24] 1430 	mov	_SAFE_MOD,#0x55
+                                   1431 ;	main.c:398: SAFE_MOD = 0xAA;
+      0003D0 75 A1 AA         [24] 1432 	mov	_SAFE_MOD,#0xaa
+                                   1433 ;	main.c:399: WAKE_CTRL = 0x00;
+      0003D3 75 A9 00         [24] 1434 	mov	_WAKE_CTRL,#0x00
+      0003D6 02r04rAB         [24] 1435 	ljmp	00204$
+      0003D9                       1436 00168$:
+                                   1437 ;	main.c:403: len = 0xFF; /* 操作失败 */
+      0003D9 7E FF            [12] 1438 	mov	r6,#0xff
+      0003DB 7F 00            [12] 1439 	mov	r7,#0x00
+      0003DD 02r04rAB         [24] 1440 	ljmp	00204$
+      0003E0                       1441 00171$:
+                                   1442 ;	main.c:408: len = 0xFF; /* 操作失败 */
+      0003E0 7E FF            [12] 1443 	mov	r6,#0xff
+      0003E2 7F 00            [12] 1444 	mov	r7,#0x00
+      0003E4 02r04rAB         [24] 1445 	ljmp	00204$
+      0003E7                       1446 00186$:
+                                   1447 ;	main.c:411: else if ((UsbSetupBuf->bRequestType & 0x1F) == USB_REQ_RECIP_ENDP) /* 设置端点 */
+      0003E7 90 01 00         [24] 1448 	mov	dptr,#_Ep0Buffer
+      0003EA E0               [24] 1449 	movx	a,@dptr
+      0003EB FD               [12] 1450 	mov	r5,a
+      0003EC 53 05 1F         [24] 1451 	anl	ar5,#0x1f
+      0003EF 7C 00            [12] 1452 	mov	r4,#0x00
+      0003F1 BD 02 05         [24] 1453 	cjne	r5,#0x02,00556$
+      0003F4 BC 00 02         [24] 1454 	cjne	r4,#0x00,00556$
+      0003F7 80 02            [24] 1455 	sjmp	00557$
+      0003F9                       1456 00556$:
+      0003F9 80 7A            [24] 1457 	sjmp	00183$
+      0003FB                       1458 00557$:
+                                   1459 ;	main.c:413: if ((((uint16_t)UsbSetupBuf->wValueH << 8) | UsbSetupBuf->wValueL) == 0x00)
+      0003FB 90 01 03         [24] 1460 	mov	dptr,#(_Ep0Buffer + 0x0003)
+      0003FE E0               [24] 1461 	movx	a,@dptr
+      0003FF FC               [12] 1462 	mov	r4,a
+      000400 7D 00            [12] 1463 	mov	r5,#0x00
+      000402 90 01 02         [24] 1464 	mov	dptr,#(_Ep0Buffer + 0x0002)
+      000405 E0               [24] 1465 	movx	a,@dptr
+      000406 FB               [12] 1466 	mov	r3,a
+      000407 7A 00            [12] 1467 	mov	r2,#0x00
+      000409 42 05            [12] 1468 	orl	ar5,a
+      00040B EA               [12] 1469 	mov	a,r2
+      00040C 42 04            [12] 1470 	orl	ar4,a
+      00040E ED               [12] 1471 	mov	a,r5
+      00040F 4C               [12] 1472 	orl	a,r4
+      000410 70 5D            [24] 1473 	jnz	00180$
+                                   1474 ;	main.c:415: switch (((uint16_t)UsbSetupBuf->wIndexH << 8) | UsbSetupBuf->wIndexL)
+      000412 90 01 05         [24] 1475 	mov	dptr,#(_Ep0Buffer + 0x0005)
+      000415 E0               [24] 1476 	movx	a,@dptr
+      000416 FC               [12] 1477 	mov	r4,a
+      000417 7D 00            [12] 1478 	mov	r5,#0x00
+      000419 90 01 04         [24] 1479 	mov	dptr,#(_Ep0Buffer + 0x0004)
+      00041C E0               [24] 1480 	movx	a,@dptr
+      00041D FB               [12] 1481 	mov	r3,a
+      00041E 7A 00            [12] 1482 	mov	r2,#0x00
+      000420 42 05            [12] 1483 	orl	ar5,a
+      000422 EA               [12] 1484 	mov	a,r2
+      000423 42 04            [12] 1485 	orl	ar4,a
+      000425 BD 01 05         [24] 1486 	cjne	r5,#0x01,00559$
+      000428 BC 00 02         [24] 1487 	cjne	r4,#0x00,00559$
+      00042B 80 34            [24] 1488 	sjmp	00176$
+      00042D                       1489 00559$:
+      00042D BD 02 05         [24] 1490 	cjne	r5,#0x02,00560$
+      000430 BC 00 02         [24] 1491 	cjne	r4,#0x00,00560$
+      000433 80 18            [24] 1492 	sjmp	00174$
+      000435                       1493 00560$:
+      000435 BD 81 05         [24] 1494 	cjne	r5,#0x81,00561$
+      000438 BC 00 02         [24] 1495 	cjne	r4,#0x00,00561$
+      00043B 80 1A            [24] 1496 	sjmp	00175$
+      00043D                       1497 00561$:
+      00043D BD 82 29         [24] 1498 	cjne	r5,#0x82,00177$
+      000440 BC 00 26         [24] 1499 	cjne	r4,#0x00,00177$
+                                   1500 ;	main.c:418: UEP2_CTRL = UEP2_CTRL & (~bUEP_T_TOG) | UEP_T_RES_STALL; /* 设置端点2 IN STALL */
+      000443 74 BF            [12] 1501 	mov	a,#0xbf
+      000445 55 D4            [12] 1502 	anl	a,_UEP2_CTRL
+      000447 44 03            [12] 1503 	orl	a,#0x03
+      000449 F5 D4            [12] 1504 	mov	_UEP2_CTRL,a
+                                   1505 ;	main.c:419: break;
+                                   1506 ;	main.c:420: case 0x02:
+      00044B 80 5E            [24] 1507 	sjmp	00204$
+      00044D                       1508 00174$:
+                                   1509 ;	main.c:421: UEP2_CTRL = UEP2_CTRL & (~bUEP_R_TOG) | UEP_R_RES_STALL; /* 设置端点2 OUT Stall */
+      00044D 74 7F            [12] 1510 	mov	a,#0x7f
+      00044F 55 D4            [12] 1511 	anl	a,_UEP2_CTRL
+      000451 44 0C            [12] 1512 	orl	a,#0x0c
+      000453 F5 D4            [12] 1513 	mov	_UEP2_CTRL,a
+                                   1514 ;	main.c:422: break;
+                                   1515 ;	main.c:423: case 0x81:
+      000455 80 54            [24] 1516 	sjmp	00204$
+      000457                       1517 00175$:
+                                   1518 ;	main.c:424: UEP1_CTRL = UEP1_CTRL & (~bUEP_T_TOG) | UEP_T_RES_STALL; /* 设置端点1 IN STALL */
+      000457 74 BF            [12] 1519 	mov	a,#0xbf
+      000459 55 D2            [12] 1520 	anl	a,_UEP1_CTRL
+      00045B 44 03            [12] 1521 	orl	a,#0x03
+      00045D F5 D2            [12] 1522 	mov	_UEP1_CTRL,a
+                                   1523 ;	main.c:425: break;
+                                   1524 ;	main.c:426: case 0x01:
+      00045F 80 4A            [24] 1525 	sjmp	00204$
+      000461                       1526 00176$:
+                                   1527 ;	main.c:427: UEP1_CTRL = UEP1_CTRL & (~bUEP_R_TOG) | UEP_R_RES_STALL; /* 设置端点1 OUT Stall */
+      000461 74 7F            [12] 1528 	mov	a,#0x7f
+      000463 55 D2            [12] 1529 	anl	a,_UEP1_CTRL
+      000465 44 0C            [12] 1530 	orl	a,#0x0c
+      000467 F5 D2            [12] 1531 	mov	_UEP1_CTRL,a
+                                   1532 ;	main.c:428: default:
+      000469                       1533 00177$:
+                                   1534 ;	main.c:429: len = 0xFF; /* 操作失败 */
+      000469 7E FF            [12] 1535 	mov	r6,#0xff
+      00046B 7F 00            [12] 1536 	mov	r7,#0x00
+                                   1537 ;	main.c:431: }
+      00046D 80 3C            [24] 1538 	sjmp	00204$
+      00046F                       1539 00180$:
+                                   1540 ;	main.c:435: len = 0xFF; /* 操作失败 */
+      00046F 7E FF            [12] 1541 	mov	r6,#0xff
+      000471 7F 00            [12] 1542 	mov	r7,#0x00
+      000473 80 36            [24] 1543 	sjmp	00204$
+      000475                       1544 00183$:
+                                   1545 ;	main.c:440: len = 0xFF; /* 操作失败 */
+      000475 7E FF            [12] 1546 	mov	r6,#0xff
+      000477 7F 00            [12] 1547 	mov	r7,#0x00
+                                   1548 ;	main.c:442: break;
+                                   1549 ;	main.c:443: case USB_GET_STATUS:
+      000479 80 30            [24] 1550 	sjmp	00204$
+      00047B                       1551 00188$:
+                                   1552 ;	main.c:444: Ep0Buffer[0] = 0x00;
+      00047B 90 01 00         [24] 1553 	mov	dptr,#_Ep0Buffer
+      00047E E4               [12] 1554 	clr	a
+      00047F F0               [24] 1555 	movx	@dptr,a
+                                   1556 ;	main.c:445: Ep0Buffer[1] = 0x00;
+      000480 90 01 01         [24] 1557 	mov	dptr,#(_Ep0Buffer + 0x0001)
+      000483 F0               [24] 1558 	movx	@dptr,a
+                                   1559 ;	main.c:446: if (SetupLen >= 2)
+      000484 C3               [12] 1560 	clr	c
+      000485 E5*00            [12] 1561 	mov	a,_SetupLen
+      000487 94 02            [12] 1562 	subb	a,#0x02
+      000489 E5*01            [12] 1563 	mov	a,(_SetupLen + 1)
+      00048B 94 00            [12] 1564 	subb	a,#0x00
+      00048D 40 06            [24] 1565 	jc	00190$
+                                   1566 ;	main.c:448: len = 2;
+      00048F 7E 02            [12] 1567 	mov	r6,#0x02
+      000491 7F 00            [12] 1568 	mov	r7,#0x00
+      000493 80 16            [24] 1569 	sjmp	00204$
+      000495                       1570 00190$:
+                                   1571 ;	main.c:452: len = SetupLen;
+      000495 AE*00            [24] 1572 	mov	r6,_SetupLen
+      000497 AF*01            [24] 1573 	mov	r7,(_SetupLen + 1)
+                                   1574 ;	main.c:454: break;
+                                   1575 ;	main.c:455: default:
+      000499 80 10            [24] 1576 	sjmp	00204$
+      00049B                       1577 00192$:
+                                   1578 ;	main.c:456: len = 0xff; //操作失败
+      00049B 7E FF            [12] 1579 	mov	r6,#0xff
+      00049D 7F 00            [12] 1580 	mov	r7,#0x00
+                                   1581 ;	main.c:458: }
+                                   1582 ;	main.c:465: default:
+      00049F 80 0A            [24] 1583 	sjmp	00204$
+      0004A1                       1584 00194$:
+                                   1585 ;	main.c:466: len = 0xFF; /*命令不支持*/
+      0004A1 7E FF            [12] 1586 	mov	r6,#0xff
+      0004A3 7F 00            [12] 1587 	mov	r7,#0x00
+                                   1588 ;	main.c:468: }
+      0004A5 80 04            [24] 1589 	sjmp	00204$
+      0004A7                       1590 00203$:
+                                   1591 ;	main.c:473: len = 0xff; //包长度错误
+      0004A7 7E FF            [12] 1592 	mov	r6,#0xff
+      0004A9 7F 00            [12] 1593 	mov	r7,#0x00
+      0004AB                       1594 00204$:
+                                   1595 ;	main.c:475: if (len == 0xff)
+      0004AB BE FF 0C         [24] 1596 	cjne	r6,#0xff,00209$
+      0004AE BF 00 09         [24] 1597 	cjne	r7,#0x00,00209$
+                                   1598 ;	main.c:477: SetupReq = 0xFF;
+      0004B1 75*02 FF         [24] 1599 	mov	_SetupReq,#0xff
+                                   1600 ;	main.c:478: UEP0_CTRL = bUEP_R_TOG | bUEP_T_TOG | UEP_R_RES_STALL | UEP_T_RES_STALL; //STALL
+      0004B4 75 DC CF         [24] 1601 	mov	_UEP0_CTRL,#0xcf
+      0004B7 02r05r56         [24] 1602 	ljmp	00220$
+      0004BA                       1603 00209$:
+                                   1604 ;	main.c:480: else if (len <= DEFAULT_ENDP0_SIZE) //上传数据或者状态阶段返回0长度包
+      0004BA C3               [12] 1605 	clr	c
+      0004BB 74 08            [12] 1606 	mov	a,#0x08
+      0004BD 9E               [12] 1607 	subb	a,r6
+      0004BE E4               [12] 1608 	clr	a
+      0004BF 9F               [12] 1609 	subb	a,r7
+      0004C0 40 08            [24] 1610 	jc	00206$
+                                   1611 ;	main.c:482: UEP0_T_LEN = len;
+      0004C2 8E DD            [24] 1612 	mov	_UEP0_T_LEN,r6
+                                   1613 ;	main.c:483: UEP0_CTRL = bUEP_R_TOG | bUEP_T_TOG | UEP_R_RES_ACK | UEP_T_RES_ACK; //默认数据包是DATA1，返回应答ACK
+      0004C4 75 DC C0         [24] 1614 	mov	_UEP0_CTRL,#0xc0
+      0004C7 02r05r56         [24] 1615 	ljmp	00220$
+      0004CA                       1616 00206$:
+                                   1617 ;	main.c:487: UEP0_T_LEN = 0;														 //虽然尚未到状态阶段，但是提前预置上传0长度数据包以防主机提前进入状态阶段
+      0004CA 75 DD 00         [24] 1618 	mov	_UEP0_T_LEN,#0x00
+                                   1619 ;	main.c:488: UEP0_CTRL = bUEP_R_TOG | bUEP_T_TOG | UEP_R_RES_ACK | UEP_T_RES_ACK; //默认数据包是DATA1,返回应答ACK
+      0004CD 75 DC C0         [24] 1620 	mov	_UEP0_CTRL,#0xc0
+                                   1621 ;	main.c:490: break;
+      0004D0 02r05r56         [24] 1622 	ljmp	00220$
+                                   1623 ;	main.c:491: case UIS_TOKEN_IN | 0: //endpoint0 IN
+      0004D3                       1624 00211$:
+                                   1625 ;	main.c:492: switch (SetupReq)
+      0004D3 74 05            [12] 1626 	mov	a,#0x05
+      0004D5 B5*02 02         [24] 1627 	cjne	a,_SetupReq,00568$
+      0004D8 80 5A            [24] 1628 	sjmp	00213$
+      0004DA                       1629 00568$:
+      0004DA 74 06            [12] 1630 	mov	a,#0x06
+      0004DC B5*02 69         [24] 1631 	cjne	a,_SetupReq,00216$
+                                   1632 ;	main.c:495: len = SetupLen >= DEFAULT_ENDP0_SIZE ? DEFAULT_ENDP0_SIZE : SetupLen; //本次传输长度
+      0004DF C3               [12] 1633 	clr	c
+      0004E0 E5*00            [12] 1634 	mov	a,_SetupLen
+      0004E2 94 08            [12] 1635 	subb	a,#0x08
+      0004E4 E5*01            [12] 1636 	mov	a,(_SetupLen + 1)
+      0004E6 94 00            [12] 1637 	subb	a,#0x00
+      0004E8 40 06            [24] 1638 	jc	00237$
+      0004EA 7E 08            [12] 1639 	mov	r6,#0x08
+      0004EC 7F 00            [12] 1640 	mov	r7,#0x00
+      0004EE 80 04            [24] 1641 	sjmp	00238$
+      0004F0                       1642 00237$:
+      0004F0 AE*00            [24] 1643 	mov	r6,_SetupLen
+      0004F2 AF*01            [24] 1644 	mov	r7,(_SetupLen + 1)
+      0004F4                       1645 00238$:
+                                   1646 ;	main.c:496: memcpy(Ep0Buffer, pDescr, len);										  //加载上传数据
+      0004F4 85*07*00         [24] 1647 	mov	___memcpy_PARM_2,_pDescr
+      0004F7 85*08*01         [24] 1648 	mov	(___memcpy_PARM_2 + 1),(_pDescr + 1)
+      0004FA 85*09*02         [24] 1649 	mov	(___memcpy_PARM_2 + 2),(_pDescr + 2)
+      0004FD 8E*00            [24] 1650 	mov	___memcpy_PARM_3,r6
+      0004FF 8F*01            [24] 1651 	mov	(___memcpy_PARM_3 + 1),r7
+      000501 90 01 00         [24] 1652 	mov	dptr,#_Ep0Buffer
+      000504 75 F0 00         [24] 1653 	mov	b,#0x00
+      000507 C0 07            [24] 1654 	push	ar7
+      000509 C0 06            [24] 1655 	push	ar6
+      00050B 12r00r00         [24] 1656 	lcall	___memcpy
+      00050E D0 06            [24] 1657 	pop	ar6
+      000510 D0 07            [24] 1658 	pop	ar7
+                                   1659 ;	main.c:497: SetupLen -= len;
+      000512 E5*00            [12] 1660 	mov	a,_SetupLen
+      000514 C3               [12] 1661 	clr	c
+      000515 9E               [12] 1662 	subb	a,r6
+      000516 F5*00            [12] 1663 	mov	_SetupLen,a
+      000518 E5*01            [12] 1664 	mov	a,(_SetupLen + 1)
+      00051A 9F               [12] 1665 	subb	a,r7
+      00051B F5*01            [12] 1666 	mov	(_SetupLen + 1),a
+                                   1667 ;	main.c:498: pDescr += len;
+      00051D EE               [12] 1668 	mov	a,r6
+      00051E 25*07            [12] 1669 	add	a,_pDescr
+      000520 F5*07            [12] 1670 	mov	_pDescr,a
+      000522 EF               [12] 1671 	mov	a,r7
+      000523 35*08            [12] 1672 	addc	a,(_pDescr + 1)
+      000525 F5*08            [12] 1673 	mov	(_pDescr + 1),a
+                                   1674 ;	main.c:499: UEP0_T_LEN = len;
+      000527 8E DD            [24] 1675 	mov	_UEP0_T_LEN,r6
+                                   1676 ;	main.c:500: UEP0_CTRL ^= bUEP_T_TOG; //同步标志位翻转
+      000529 AE DC            [24] 1677 	mov	r6,_UEP0_CTRL
+      00052B 7F 00            [12] 1678 	mov	r7,#0x00
+      00052D 63 06 40         [24] 1679 	xrl	ar6,#0x40
+      000530 8E DC            [24] 1680 	mov	_UEP0_CTRL,r6
+                                   1681 ;	main.c:501: break;
+                                   1682 ;	main.c:502: case USB_SET_ADDRESS:
+      000532 80 22            [24] 1683 	sjmp	00220$
+      000534                       1684 00213$:
+                                   1685 ;	main.c:503: if (!vendor_control)
+      000534 E5*05            [12] 1686 	mov	a,_vendor_control
+      000536 70 1E            [24] 1687 	jnz	00220$
+                                   1688 ;	main.c:505: USB_DEV_AD = USB_DEV_AD & bUDA_GP_BIT | SetupLen;
+      000538 E5 E3            [12] 1689 	mov	a,_USB_DEV_AD
+      00053A 54 80            [12] 1690 	anl	a,#0x80
+      00053C FF               [12] 1691 	mov	r7,a
+      00053D E5*00            [12] 1692 	mov	a,_SetupLen
+      00053F FE               [12] 1693 	mov	r6,a
+      000540 4F               [12] 1694 	orl	a,r7
+      000541 F5 E3            [12] 1695 	mov	_USB_DEV_AD,a
+                                   1696 ;	main.c:506: UEP0_CTRL = UEP_R_RES_ACK | UEP_T_RES_NAK;
+      000543 75 DC 02         [24] 1697 	mov	_UEP0_CTRL,#0x02
+                                   1698 ;	main.c:508: break;
+                                   1699 ;	main.c:509: default:
+      000546 80 0E            [24] 1700 	sjmp	00220$
+      000548                       1701 00216$:
+                                   1702 ;	main.c:510: UEP0_T_LEN = 0; //状态阶段完成中断或者是强制上传0长度数据包结束控制传输
+      000548 75 DD 00         [24] 1703 	mov	_UEP0_T_LEN,#0x00
+                                   1704 ;	main.c:511: UEP0_CTRL = UEP_R_RES_ACK | UEP_T_RES_NAK;
+      00054B 75 DC 02         [24] 1705 	mov	_UEP0_CTRL,#0x02
+                                   1706 ;	main.c:514: break;
+                                   1707 ;	main.c:515: case UIS_TOKEN_OUT | 0: // endpoint0 OUT
+      00054E 80 06            [24] 1708 	sjmp	00220$
+      000550                       1709 00218$:
+                                   1710 ;	main.c:528: UEP0_T_LEN = 0;
+      000550 75 DD 00         [24] 1711 	mov	_UEP0_T_LEN,#0x00
+                                   1712 ;	main.c:529: UEP0_CTRL |= UEP_R_RES_ACK | UEP_T_RES_ACK; //状态阶段，对IN响应NAK
+      000553 85 DC DC         [24] 1713 	mov	_UEP0_CTRL,_UEP0_CTRL
+                                   1714 ;	main.c:535: }
+      000556                       1715 00220$:
+                                   1716 ;	main.c:536: UIF_TRANSFER = 0; //写0清空中断
+                                   1717 ;	assignBit
+      000556 C2 D9            [12] 1718 	clr	_UIF_TRANSFER
+      000558                       1719 00222$:
+                                   1720 ;	main.c:538: if (UIF_BUS_RST) //设备模式USB总线复位中断
+      000558 30 D8 1D         [24] 1721 	jnb	_UIF_BUS_RST,00224$
+                                   1722 ;	main.c:543: UEP0_CTRL = UEP_R_RES_ACK | UEP_T_RES_NAK;
+      00055B 75 DC 02         [24] 1723 	mov	_UEP0_CTRL,#0x02
+                                   1724 ;	main.c:544: UEP1_CTRL = bUEP_AUTO_TOG | UEP_T_RES_NAK;
+      00055E 75 D2 12         [24] 1725 	mov	_UEP1_CTRL,#0x12
+                                   1726 ;	main.c:545: UEP2_CTRL = bUEP_AUTO_TOG | UEP_R_RES_ACK;
+      000561 75 D4 10         [24] 1727 	mov	_UEP2_CTRL,#0x10
+                                   1728 ;	main.c:546: USB_DEV_AD = 0x00;
+      000564 75 E3 00         [24] 1729 	mov	_USB_DEV_AD,#0x00
+                                   1730 ;	main.c:547: UIF_SUSPEND = 0;
+                                   1731 ;	assignBit
+      000567 C2 DA            [12] 1732 	clr	_UIF_SUSPEND
+                                   1733 ;	main.c:548: UIF_TRANSFER = 0;
+                                   1734 ;	assignBit
+      000569 C2 D9            [12] 1735 	clr	_UIF_TRANSFER
+                                   1736 ;	main.c:549: UIF_BUS_RST = 0; //清中断标志
+                                   1737 ;	assignBit
+      00056B C2 D8            [12] 1738 	clr	_UIF_BUS_RST
+                                   1739 ;	main.c:551: USBByteCount = 0; //USB端点收到的长度
+      00056D 78r00            [12] 1740 	mov	r0,#_USBByteCount
+      00056F 76 00            [12] 1741 	mov	@r0,#0x00
+                                   1742 ;	main.c:552: UsbConfig = 0;	//清除配置值
+      000571 75*04 00         [24] 1743 	mov	_UsbConfig,#0x00
+                                   1744 ;	main.c:553: ep1_in_busy = 0;
+      000574 78r04            [12] 1745 	mov	r0,#_ep1_in_busy
+      000576 76 00            [12] 1746 	mov	@r0,#0x00
+      000578                       1747 00224$:
+                                   1748 ;	main.c:555: if (UIF_SUSPEND) //USB总线挂起/唤醒完成
+                                   1749 ;	main.c:557: UIF_SUSPEND = 0;
+                                   1750 ;	assignBit
+      000578 10 DA 02         [24] 1751 	jbc	_UIF_SUSPEND,00574$
+      00057B 80 21            [24] 1752 	sjmp	00231$
+      00057D                       1753 00574$:
+                                   1754 ;	main.c:558: if (USB_MIS_ST & bUMS_SUSPEND) //挂起
+      00057D E5 DA            [12] 1755 	mov	a,_USB_MIS_ST
+      00057F 30 E2 1F         [24] 1756 	jnb	acc.2,00233$
+                                   1757 ;	main.c:563: while (XBUS_AUX & bUART0_TX)
+      000582                       1758 00225$:
+      000582 E5 A2            [12] 1759 	mov	a,_XBUS_AUX
+      000584 20 E7 FB         [24] 1760 	jb	acc.7,00225$
+                                   1761 ;	main.c:567: SAFE_MOD = 0x55;
+      000587 75 A1 55         [24] 1762 	mov	_SAFE_MOD,#0x55
+                                   1763 ;	main.c:568: SAFE_MOD = 0xAA;
+      00058A 75 A1 AA         [24] 1764 	mov	_SAFE_MOD,#0xaa
+                                   1765 ;	main.c:569: WAKE_CTRL = bWAK_BY_USB | bWAK_RXD0_LO | bWAK_RXD1_LO; //USB或者RXD0/1有信号时可被唤醒
+      00058D 75 A9 C1         [24] 1766 	mov	_WAKE_CTRL,#0xc1
+                                   1767 ;	main.c:570: PCON |= PD;											   //睡眠
+      000590 43 87 02         [24] 1768 	orl	_PCON,#0x02
+                                   1769 ;	main.c:571: SAFE_MOD = 0x55;
+      000593 75 A1 55         [24] 1770 	mov	_SAFE_MOD,#0x55
+                                   1771 ;	main.c:572: SAFE_MOD = 0xAA;
+      000596 75 A1 AA         [24] 1772 	mov	_SAFE_MOD,#0xaa
+                                   1773 ;	main.c:573: WAKE_CTRL = 0x00;
+      000599 75 A9 00         [24] 1774 	mov	_WAKE_CTRL,#0x00
+      00059C 80 03            [24] 1775 	sjmp	00233$
+      00059E                       1776 00231$:
+                                   1777 ;	main.c:578: USB_INT_FG = 0xFF; //清中断标志
+      00059E 75 D8 FF         [24] 1778 	mov	_USB_INT_FG,#0xff
+      0005A1                       1779 00233$:
+                                   1780 ;	main.c:580: }
+      0005A1 D0 D0            [24] 1781 	pop	psw
+      0005A3 D0 00            [24] 1782 	pop	(0+0)
+      0005A5 D0 01            [24] 1783 	pop	(0+1)
+      0005A7 D0 02            [24] 1784 	pop	(0+2)
+      0005A9 D0 03            [24] 1785 	pop	(0+3)
+      0005AB D0 04            [24] 1786 	pop	(0+4)
+      0005AD D0 05            [24] 1787 	pop	(0+5)
+      0005AF D0 06            [24] 1788 	pop	(0+6)
+      0005B1 D0 07            [24] 1789 	pop	(0+7)
+      0005B3 D0 83            [24] 1790 	pop	dph
+      0005B5 D0 82            [24] 1791 	pop	dpl
+      0005B7 D0 F0            [24] 1792 	pop	b
+      0005B9 D0 E0            [24] 1793 	pop	acc
+      0005BB D0*00            [24] 1794 	pop	bits
+      0005BD 32               [24] 1795 	reti
+                                   1796 ;------------------------------------------------------------
+                                   1797 ;Allocation info for local variables in function 'main'
+                                   1798 ;------------------------------------------------------------
+                                   1799 ;length                    Allocated to registers r3 
+                                   1800 ;read_buffer_index         Allocated to registers r2 
+                                   1801 ;shift_count               Allocated to registers r7 
+                                   1802 ;operand                   Allocated to registers 
+                                   1803 ;shift_en                  Allocated to registers r5 
+                                   1804 ;read_en                   Allocated with name '_main_read_en_65536_102'
+                                   1805 ;timeout_count             Allocated with name '_main_timeout_count_65536_102'
+                                   1806 ;data_len                  Allocated to registers r5 
+                                   1807 ;i                         Allocated to registers r5 
+                                   1808 ;------------------------------------------------------------
+                                   1809 ;	main.c:587: void main()
+                                   1810 ;	-----------------------------------------
+                                   1811 ;	 function main
+                                   1812 ;	-----------------------------------------
+      0005BE                       1813 _main:
+                                   1814 ;	main.c:591: uint8_t shift_count = 0;
+      0005BE 7F 00            [12] 1815 	mov	r7,#0x00
+                                   1816 ;	main.c:594: uint8_t read_en = 0;
+                                   1817 ;	1-genFromRTrack replaced	mov	_main_read_en_65536_102,#0x00
+      0005C0 8F*12            [24] 1818 	mov	_main_read_en_65536_102,r7
+                                   1819 ;	main.c:595: uint16_t timeout_count = 0;
+      0005C2 E4               [12] 1820 	clr	a
+      0005C3 F5*13            [12] 1821 	mov	_main_timeout_count_65536_102,a
+      0005C5 F5*14            [12] 1822 	mov	(_main_timeout_count_65536_102 + 1),a
+                                   1823 ;	main.c:597: CfgFsys();   //CH559时钟选择配置
+      0005C7 C0 07            [24] 1824 	push	ar7
+      0005C9 12r00r00         [24] 1825 	lcall	_CfgFsys
+                                   1826 ;	main.c:599: BTN = 1;
+                                   1827 ;	assignBit
+      0005CC D2 B2            [12] 1828 	setb	_BTN
+                                   1829 ;	main.c:600: mDelaymS(50);
+      0005CE 90 00 32         [24] 1830 	mov	dptr,#0x0032
+      0005D1 12r00r00         [24] 1831 	lcall	_mDelaymS
+      0005D4 D0 07            [24] 1832 	pop	ar7
+                                   1833 ;	main.c:601: if (BTN == 0)
+      0005D6 20 B2 1A         [24] 1834 	jb	_BTN,00107$
+                                   1835 ;	main.c:603: mDelaymS(50);
+      0005D9 90 00 32         [24] 1836 	mov	dptr,#0x0032
+      0005DC C0 07            [24] 1837 	push	ar7
+      0005DE 12r00r00         [24] 1838 	lcall	_mDelaymS
+      0005E1 D0 07            [24] 1839 	pop	ar7
+                                   1840 ;	main.c:604: if (BTN == 0)
+      0005E3 20 B2 0D         [24] 1841 	jb	_BTN,00107$
+                                   1842 ;	main.c:606: EA = 0;
+                                   1843 ;	assignBit
+      0005E6 C2 AF            [12] 1844 	clr	_EA
+                                   1845 ;	main.c:607: mDelaymS(100);
+      0005E8 90 00 64         [24] 1846 	mov	dptr,#0x0064
+      0005EB 12r00r00         [24] 1847 	lcall	_mDelaymS
+                                   1848 ;	main.c:608: (*(void (*)(void))0x3800)(); // goto bootloader.
+      0005EE 12 38 00         [24] 1849 	lcall	0x3800
+                                   1850 ;	main.c:609: while (1)
+      0005F1                       1851 00102$:
+      0005F1 80 FE            [24] 1852 	sjmp	00102$
+      0005F3                       1853 00107$:
+                                   1854 ;	main.c:614: USBDeviceCfg();
+      0005F3 C0 07            [24] 1855 	push	ar7
+      0005F5 12r00r00         [24] 1856 	lcall	_USBDeviceCfg
+                                   1857 ;	main.c:615: USBDeviceEndPointCfg(); //端点配置
+      0005F8 12r00r2D         [24] 1858 	lcall	_USBDeviceEndPointCfg
+                                   1859 ;	main.c:616: USBDeviceIntCfg();		//中断初始化
+      0005FB 12r00r19         [24] 1860 	lcall	_USBDeviceIntCfg
+      0005FE D0 07            [24] 1861 	pop	ar7
+                                   1862 ;	main.c:620: P1_MOD_OC = 0x40;
+      000600 75 92 40         [24] 1863 	mov	_P1_MOD_OC,#0x40
+                                   1864 ;	main.c:621: P1_DIR_PU = 0xf2;
+      000603 75 93 F2         [24] 1865 	mov	_P1_DIR_PU,#0xf2
+                                   1866 ;	main.c:622: TDO = 1;
+                                   1867 ;	assignBit
+      000606 D2 96            [12] 1868 	setb	_TDO
+                                   1869 ;	main.c:624: UEP0_T_LEN = 0;
+      000608 75 DD 00         [24] 1870 	mov	_UEP0_T_LEN,#0x00
+                                   1871 ;	main.c:625: UEP1_T_LEN = 0; //预使用发送长度一定要清空
+      00060B 75 D3 00         [24] 1872 	mov	_UEP1_T_LEN,#0x00
+                                   1873 ;	main.c:627: Ep1Buffer[0] = FTDI_MODEM_STA_DUMMY0;
+      00060E 90 01 40         [24] 1874 	mov	dptr,#_Ep1Buffer
+      000611 74 01            [12] 1875 	mov	a,#0x01
+      000613 F0               [24] 1876 	movx	@dptr,a
+                                   1877 ;	main.c:628: Ep1Buffer[1] = FTDI_MODEM_STA_DUMMY1;
+      000614 90 01 41         [24] 1878 	mov	dptr,#(_Ep1Buffer + 0x0001)
+      000617 74 60            [12] 1879 	mov	a,#0x60
+      000619 F0               [24] 1880 	movx	@dptr,a
+                                   1881 ;	main.c:630: transmit_buffer_in_offset = 0;
+      00061A 78r06            [12] 1882 	mov	r0,#_transmit_buffer_in_offset
+      00061C 76 00            [12] 1883 	mov	@r0,#0x00
+                                   1884 ;	main.c:631: transmit_buffer_out_offset = 0;
+      00061E 78r07            [12] 1885 	mov	r0,#_transmit_buffer_out_offset
+      000620 76 00            [12] 1886 	mov	@r0,#0x00
+                                   1887 ;	main.c:634: send_dummy = 1;
+      000622 75*06 01         [24] 1888 	mov	_send_dummy,#0x01
+                                   1889 ;	main.c:637: while (1)
+      000625                       1890 00139$:
+                                   1891 ;	main.c:639: if (UsbConfig)
+      000625 E5*04            [12] 1892 	mov	a,_UsbConfig
+      000627 60 FC            [24] 1893 	jz	00139$
+                                   1894 ;	main.c:641: length = 0;
+      000629 7B 00            [12] 1895 	mov	r3,#0x00
+                                   1896 ;	main.c:642: if (USBByteCount) //USB接收端点有数据
+      00062B 78r00            [12] 1897 	mov	r0,#_USBByteCount
+      00062D E6               [12] 1898 	mov	a,@r0
+      00062E 70 03            [24] 1899 	jnz	00255$
+      000630 02r06r59         [24] 1900 	ljmp	00159$
+      000633                       1901 00255$:
+                                   1902 ;	main.c:661: __endasm;
+      000633 C0 07            [24] 1903 	push	ar7
+      000635 C0 E0            [24] 1904 	push	a
+      000637 05 A2            [12] 1905 	inc	_XBUS_AUX
+      000639 90 00 80         [24] 1906 	mov	dptr, #_receive_buffer
+      00063C 15 A2            [12] 1907 	dec	_XBUS_AUX
+      00063E 90 01 80         [24] 1908 	mov	dptr, #_Ep2Buffer
+      000641 85*00 07         [24] 1909 	mov	ar7, _USBByteCount
+      000644                       1910 	    1$:
+      000644 E0               [24] 1911 	movx	a, @dptr
+      000645 A3               [24] 1912 	inc	dptr
+      000646 A5                    1913 	.db	#0xA5
+      000647 D5 07 FA         [24] 1914 	djnz	ar7, 1$
+      00064A D0 E0            [24] 1915 	pop	a
+      00064C D0 07            [24] 1916 	pop	ar7
+                                   1917 ;	main.c:663: UEP2_CTRL = UEP2_CTRL & ~MASK_UEP_R_RES | UEP_R_RES_ACK;
+      00064E 53 D4 F3         [24] 1918 	anl	_UEP2_CTRL,#0xf3
+                                   1919 ;	main.c:664: length = USBByteCount;
+      000651 78r00            [12] 1920 	mov	r0,#_USBByteCount
+      000653 86 03            [24] 1921 	mov	ar3,@r0
+                                   1922 ;	main.c:665: USBByteCount = 0;
+      000655 78r00            [12] 1923 	mov	r0,#_USBByteCount
+      000657 76 00            [12] 1924 	mov	@r0,#0x00
+                                   1925 ;	main.c:669: while (read_buffer_index < length)
+      000659                       1926 00159$:
+      000659 7A 00            [12] 1927 	mov	r2,#0x00
+      00065B                       1928 00122$:
+      00065B C3               [12] 1929 	clr	c
+      00065C EA               [12] 1930 	mov	a,r2
+      00065D 9B               [12] 1931 	subb	a,r3
+      00065E 40 03            [24] 1932 	jc	00256$
+      000660 02r07r7D         [24] 1933 	ljmp	00124$
+      000663                       1934 00256$:
+                                   1935 ;	main.c:671: P2 = receive_buffer[read_buffer_index];
+      000663 EA               [12] 1936 	mov	a,r2
+      000664 24 80            [12] 1937 	add	a,#_receive_buffer
+      000666 F5 82            [12] 1938 	mov	dpl,a
+      000668 E4               [12] 1939 	clr	a
+      000669 34 00            [12] 1940 	addc	a,#(_receive_buffer >> 8)
+      00066B F5 83            [12] 1941 	mov	dph,a
+      00066D E0               [24] 1942 	movx	a,@dptr
+      00066E F5 A0            [12] 1943 	mov	_P2,a
+                                   1944 ;	main.c:672: read_buffer_index++;
+      000670 0A               [12] 1945 	inc	r2
+                                   1946 ;	main.c:675: if (shift_count == 0)
+      000671 EF               [12] 1947 	mov	a,r7
+      000672 70 4B            [24] 1948 	jnz	00120$
+                                   1949 ;	main.c:677: shift_en = P2B7;
+      000674 A2 A7            [12] 1950 	mov	c,_P2B7
+      000676 E4               [12] 1951 	clr	a
+      000677 33               [12] 1952 	rlc	a
+      000678 FD               [12] 1953 	mov	r5,a
+                                   1954 ;	main.c:678: read_en = P2B6;
+      000679 A2 A6            [12] 1955 	mov	c,_P2B6
+      00067B E4               [12] 1956 	clr	a
+      00067C 33               [12] 1957 	rlc	a
+      00067D F5*12            [12] 1958 	mov	_main_read_en_65536_102,a
+                                   1959 ;	main.c:679: if (shift_en)
+      00067F ED               [12] 1960 	mov	a,r5
+      000680 60 07            [24] 1961 	jz	00114$
+                                   1962 ;	main.c:681: shift_count = P2 & 0x3f;
+      000682 E5 A0            [12] 1963 	mov	a,_P2
+      000684 54 3F            [12] 1964 	anl	a,#0x3f
+      000686 FF               [12] 1965 	mov	r7,a
+      000687 80 D2            [24] 1966 	sjmp	00122$
+      000689                       1967 00114$:
+                                   1968 ;	main.c:683: else if (read_en)
+      000689 E5*12            [12] 1969 	mov	a,_main_read_en_65536_102
+      00068B 60 24            [24] 1970 	jz	00111$
+                                   1971 ;	main.c:686: TDI = P2B4;
+                                   1972 ;	assignBit
+      00068D A2 A4            [12] 1973 	mov	c,_P2B4
+      00068F 92 95            [24] 1974 	mov	_TDI,c
+                                   1975 ;	main.c:687: TMS = P2B1;
+                                   1976 ;	assignBit
+      000691 A2 A1            [12] 1977 	mov	c,_P2B1
+      000693 92 94            [24] 1978 	mov	_TMS,c
+                                   1979 ;	main.c:688: TCK = P2B0;
+                                   1980 ;	assignBit
+      000695 A2 A0            [12] 1981 	mov	c,_P2B0
+      000697 92 97            [24] 1982 	mov	_TCK,c
+                                   1983 ;	main.c:689: transmit_buffer[transmit_buffer_in_offset] = TDO;
+      000699 78r06            [12] 1984 	mov	r0,#_transmit_buffer_in_offset
+      00069B 86 82            [24] 1985 	mov	dpl,@r0
+      00069D 75 83 00         [24] 1986 	mov	dph,#(_transmit_buffer >> 8)
+      0006A0 A2 96            [12] 1987 	mov	c,_TDO
+      0006A2 E4               [12] 1988 	clr	a
+      0006A3 33               [12] 1989 	rlc	a
+      0006A4 FD               [12] 1990 	mov	r5,a
+      0006A5 F0               [24] 1991 	movx	@dptr,a
+                                   1992 ;	main.c:690: transmit_buffer_in_offset++;
+      0006A6 78r06            [12] 1993 	mov	r0,#_transmit_buffer_in_offset
+      0006A8 06               [12] 1994 	inc	@r0
+                                   1995 ;	main.c:691: transmit_buffer_in_offset &= 0x7f;// %= sizeof(transmit_buffer);
+      0006A9 78r06            [12] 1996 	mov	r0,#_transmit_buffer_in_offset
+      0006AB E6               [12] 1997 	mov	a,@r0
+      0006AC 54 7F            [12] 1998 	anl	a,#0x7f
+      0006AE F6               [12] 1999 	mov	@r0,a
+      0006AF 80 AA            [24] 2000 	sjmp	00122$
+      0006B1                       2001 00111$:
+                                   2002 ;	main.c:696: TDI = P2B4;
+                                   2003 ;	assignBit
+      0006B1 A2 A4            [12] 2004 	mov	c,_P2B4
+      0006B3 92 95            [24] 2005 	mov	_TDI,c
+                                   2006 ;	main.c:697: TMS = P2B1;
+                                   2007 ;	assignBit
+      0006B5 A2 A1            [12] 2008 	mov	c,_P2B1
+      0006B7 92 94            [24] 2009 	mov	_TMS,c
+                                   2010 ;	main.c:698: TCK = P2B0;
+                                   2011 ;	assignBit
+      0006B9 A2 A0            [12] 2012 	mov	c,_P2B0
+      0006BB 92 97            [24] 2013 	mov	_TCK,c
+      0006BD 80 9C            [24] 2014 	sjmp	00122$
+      0006BF                       2015 00120$:
+                                   2016 ;	main.c:703: shift_count--;
+      0006BF 1F               [12] 2017 	dec	r7
+                                   2018 ;	main.c:704: if (read_en)
+      0006C0 E5*12            [12] 2019 	mov	a,_main_read_en_65536_102
+      0006C2 60 76            [24] 2020 	jz	00117$
+                                   2021 ;	main.c:706: TDI = P2B0;
+                                   2022 ;	assignBit
+      0006C4 A2 A0            [12] 2023 	mov	c,_P2B0
+      0006C6 92 95            [24] 2024 	mov	_TDI,c
+                                   2025 ;	main.c:707: P2B0 = TDO;
+                                   2026 ;	assignBit
+      0006C8 A2 96            [12] 2027 	mov	c,_TDO
+      0006CA 92 A0            [24] 2028 	mov	_P2B0,c
+                                   2029 ;	main.c:708: TCK = 1;
+                                   2030 ;	assignBit
+      0006CC D2 97            [12] 2031 	setb	_TCK
+                                   2032 ;	main.c:709: TCK = 0;
+                                   2033 ;	assignBit
+      0006CE C2 97            [12] 2034 	clr	_TCK
+                                   2035 ;	main.c:711: TDI = P2B1;
+                                   2036 ;	assignBit
+      0006D0 A2 A1            [12] 2037 	mov	c,_P2B1
+      0006D2 92 95            [24] 2038 	mov	_TDI,c
+                                   2039 ;	main.c:712: P2B1 = TDO;
+                                   2040 ;	assignBit
+      0006D4 A2 96            [12] 2041 	mov	c,_TDO
+      0006D6 92 A1            [24] 2042 	mov	_P2B1,c
+                                   2043 ;	main.c:713: TCK = 1;
+                                   2044 ;	assignBit
+      0006D8 D2 97            [12] 2045 	setb	_TCK
+                                   2046 ;	main.c:714: TCK = 0;
+                                   2047 ;	assignBit
+      0006DA C2 97            [12] 2048 	clr	_TCK
+                                   2049 ;	main.c:716: TDI = P2B2;
+                                   2050 ;	assignBit
+      0006DC A2 A2            [12] 2051 	mov	c,_P2B2
+      0006DE 92 95            [24] 2052 	mov	_TDI,c
+                                   2053 ;	main.c:717: P2B2 = TDO;
+                                   2054 ;	assignBit
+      0006E0 A2 96            [12] 2055 	mov	c,_TDO
+      0006E2 92 A2            [24] 2056 	mov	_P2B2,c
+                                   2057 ;	main.c:718: TCK = 1;
+                                   2058 ;	assignBit
+      0006E4 D2 97            [12] 2059 	setb	_TCK
+                                   2060 ;	main.c:719: TCK = 0;
+                                   2061 ;	assignBit
+      0006E6 C2 97            [12] 2062 	clr	_TCK
+                                   2063 ;	main.c:721: TDI = P2B3;
+                                   2064 ;	assignBit
+      0006E8 A2 A3            [12] 2065 	mov	c,_P2B3
+      0006EA 92 95            [24] 2066 	mov	_TDI,c
+                                   2067 ;	main.c:722: P2B3 = TDO;
+                                   2068 ;	assignBit
+      0006EC A2 96            [12] 2069 	mov	c,_TDO
+      0006EE 92 A3            [24] 2070 	mov	_P2B3,c
+                                   2071 ;	main.c:723: TCK = 1;
+                                   2072 ;	assignBit
+      0006F0 D2 97            [12] 2073 	setb	_TCK
+                                   2074 ;	main.c:724: TCK = 0;
+                                   2075 ;	assignBit
+      0006F2 C2 97            [12] 2076 	clr	_TCK
+                                   2077 ;	main.c:726: TDI = P2B4;
+                                   2078 ;	assignBit
+      0006F4 A2 A4            [12] 2079 	mov	c,_P2B4
+      0006F6 92 95            [24] 2080 	mov	_TDI,c
+                                   2081 ;	main.c:727: P2B4 = TDO;
+                                   2082 ;	assignBit
+      0006F8 A2 96            [12] 2083 	mov	c,_TDO
+      0006FA 92 A4            [24] 2084 	mov	_P2B4,c
+                                   2085 ;	main.c:728: TCK = 1;
+                                   2086 ;	assignBit
+      0006FC D2 97            [12] 2087 	setb	_TCK
+                                   2088 ;	main.c:729: TCK = 0;
+                                   2089 ;	assignBit
+      0006FE C2 97            [12] 2090 	clr	_TCK
+                                   2091 ;	main.c:731: TDI = P2B5;
+                                   2092 ;	assignBit
+      000700 A2 A5            [12] 2093 	mov	c,_P2B5
+      000702 92 95            [24] 2094 	mov	_TDI,c
+                                   2095 ;	main.c:732: P2B5 = TDO;
+                                   2096 ;	assignBit
+      000704 A2 96            [12] 2097 	mov	c,_TDO
+      000706 92 A5            [24] 2098 	mov	_P2B5,c
+                                   2099 ;	main.c:733: TCK = 1;
+                                   2100 ;	assignBit
+      000708 D2 97            [12] 2101 	setb	_TCK
+                                   2102 ;	main.c:734: TCK = 0;
+                                   2103 ;	assignBit
+      00070A C2 97            [12] 2104 	clr	_TCK
+                                   2105 ;	main.c:736: TDI = P2B6;
+                                   2106 ;	assignBit
+      00070C A2 A6            [12] 2107 	mov	c,_P2B6
+      00070E 92 95            [24] 2108 	mov	_TDI,c
+                                   2109 ;	main.c:737: P2B6 = TDO;
+                                   2110 ;	assignBit
+      000710 A2 96            [12] 2111 	mov	c,_TDO
+      000712 92 A6            [24] 2112 	mov	_P2B6,c
+                                   2113 ;	main.c:738: TCK = 1;
+                                   2114 ;	assignBit
+      000714 D2 97            [12] 2115 	setb	_TCK
+                                   2116 ;	main.c:739: TCK = 0;
+                                   2117 ;	assignBit
+      000716 C2 97            [12] 2118 	clr	_TCK
+                                   2119 ;	main.c:741: TDI = P2B7;
+                                   2120 ;	assignBit
+      000718 A2 A7            [12] 2121 	mov	c,_P2B7
+      00071A 92 95            [24] 2122 	mov	_TDI,c
+                                   2123 ;	main.c:742: P2B7 = TDO;
+                                   2124 ;	assignBit
+      00071C A2 96            [12] 2125 	mov	c,_TDO
+      00071E 92 A7            [24] 2126 	mov	_P2B7,c
+                                   2127 ;	main.c:743: TCK = 1;
+                                   2128 ;	assignBit
+      000720 D2 97            [12] 2129 	setb	_TCK
+                                   2130 ;	main.c:744: TCK = 0;
+                                   2131 ;	assignBit
+      000722 C2 97            [12] 2132 	clr	_TCK
+                                   2133 ;	main.c:746: transmit_buffer[transmit_buffer_in_offset] = P2;
+      000724 78r06            [12] 2134 	mov	r0,#_transmit_buffer_in_offset
+      000726 86 82            [24] 2135 	mov	dpl,@r0
+      000728 75 83 00         [24] 2136 	mov	dph,#(_transmit_buffer >> 8)
+      00072B E5 A0            [12] 2137 	mov	a,_P2
+      00072D F0               [24] 2138 	movx	@dptr,a
+                                   2139 ;	main.c:747: transmit_buffer_in_offset++;
+      00072E 78r06            [12] 2140 	mov	r0,#_transmit_buffer_in_offset
+      000730 06               [12] 2141 	inc	@r0
+                                   2142 ;	main.c:748: transmit_buffer_in_offset &= 0x7f;
+      000731 78r06            [12] 2143 	mov	r0,#_transmit_buffer_in_offset
+      000733 E6               [12] 2144 	mov	a,@r0
+      000734 54 7F            [12] 2145 	anl	a,#0x7f
+      000736 F6               [12] 2146 	mov	@r0,a
+      000737 02r06r5B         [24] 2147 	ljmp	00122$
+      00073A                       2148 00117$:
+                                   2149 ;	main.c:752: TDI = P2B0;
+                                   2150 ;	assignBit
+      00073A A2 A0            [12] 2151 	mov	c,_P2B0
+      00073C 92 95            [24] 2152 	mov	_TDI,c
+                                   2153 ;	main.c:753: TCK = 1;
+                                   2154 ;	assignBit
+      00073E D2 97            [12] 2155 	setb	_TCK
+                                   2156 ;	main.c:754: TCK = 0;
+                                   2157 ;	assignBit
+      000740 C2 97            [12] 2158 	clr	_TCK
+                                   2159 ;	main.c:756: TDI = P2B1;
+                                   2160 ;	assignBit
+      000742 A2 A1            [12] 2161 	mov	c,_P2B1
+      000744 92 95            [24] 2162 	mov	_TDI,c
+                                   2163 ;	main.c:757: TCK = 1;
+                                   2164 ;	assignBit
+      000746 D2 97            [12] 2165 	setb	_TCK
+                                   2166 ;	main.c:758: TCK = 0;
+                                   2167 ;	assignBit
+      000748 C2 97            [12] 2168 	clr	_TCK
+                                   2169 ;	main.c:760: TDI = P2B2;
+                                   2170 ;	assignBit
+      00074A A2 A2            [12] 2171 	mov	c,_P2B2
+      00074C 92 95            [24] 2172 	mov	_TDI,c
+                                   2173 ;	main.c:761: TCK = 1;
+                                   2174 ;	assignBit
+      00074E D2 97            [12] 2175 	setb	_TCK
+                                   2176 ;	main.c:762: TCK = 0;
+                                   2177 ;	assignBit
+      000750 C2 97            [12] 2178 	clr	_TCK
+                                   2179 ;	main.c:764: TDI = P2B3;
+                                   2180 ;	assignBit
+      000752 A2 A3            [12] 2181 	mov	c,_P2B3
+      000754 92 95            [24] 2182 	mov	_TDI,c
+                                   2183 ;	main.c:765: TCK = 1;
+                                   2184 ;	assignBit
+      000756 D2 97            [12] 2185 	setb	_TCK
+                                   2186 ;	main.c:766: TCK = 0;
+                                   2187 ;	assignBit
+      000758 C2 97            [12] 2188 	clr	_TCK
+                                   2189 ;	main.c:768: TDI = P2B4;
+                                   2190 ;	assignBit
+      00075A A2 A4            [12] 2191 	mov	c,_P2B4
+      00075C 92 95            [24] 2192 	mov	_TDI,c
+                                   2193 ;	main.c:769: TCK = 1;
+                                   2194 ;	assignBit
+      00075E D2 97            [12] 2195 	setb	_TCK
+                                   2196 ;	main.c:770: TCK = 0;
+                                   2197 ;	assignBit
+      000760 C2 97            [12] 2198 	clr	_TCK
+                                   2199 ;	main.c:772: TDI = P2B5;
+                                   2200 ;	assignBit
+      000762 A2 A5            [12] 2201 	mov	c,_P2B5
+      000764 92 95            [24] 2202 	mov	_TDI,c
+                                   2203 ;	main.c:773: TCK = 1;
+                                   2204 ;	assignBit
+      000766 D2 97            [12] 2205 	setb	_TCK
+                                   2206 ;	main.c:774: TCK = 0;
+                                   2207 ;	assignBit
+      000768 C2 97            [12] 2208 	clr	_TCK
+                                   2209 ;	main.c:776: TDI = P2B6;
+                                   2210 ;	assignBit
+      00076A A2 A6            [12] 2211 	mov	c,_P2B6
+      00076C 92 95            [24] 2212 	mov	_TDI,c
+                                   2213 ;	main.c:777: TCK = 1;
+                                   2214 ;	assignBit
+      00076E D2 97            [12] 2215 	setb	_TCK
+                                   2216 ;	main.c:778: TCK = 0;
+                                   2217 ;	assignBit
+      000770 C2 97            [12] 2218 	clr	_TCK
+                                   2219 ;	main.c:780: TDI = P2B7;
+                                   2220 ;	assignBit
+      000772 A2 A7            [12] 2221 	mov	c,_P2B7
+      000774 92 95            [24] 2222 	mov	_TDI,c
+                                   2223 ;	main.c:781: TCK = 1;
+                                   2224 ;	assignBit
+      000776 D2 97            [12] 2225 	setb	_TCK
+                                   2226 ;	main.c:782: TCK = 0;
+                                   2227 ;	assignBit
+      000778 C2 97            [12] 2228 	clr	_TCK
+      00077A 02r06r5B         [24] 2229 	ljmp	00122$
+      00077D                       2230 00124$:
+                                   2231 ;	main.c:787: if (ep1_in_busy == 0) //端点不繁忙（空闲后的第一包数据，只用作触发上传）
+      00077D 78r04            [12] 2232 	mov	r0,#_ep1_in_busy
+      00077F E6               [12] 2233 	mov	a,@r0
+      000780 60 03            [24] 2234 	jz	00261$
+      000782 02r06r25         [24] 2235 	ljmp	00139$
+      000785                       2236 00261$:
+                                   2237 ;	main.c:789: int8_t data_len = transmit_buffer_in_offset - transmit_buffer_out_offset;
+      000785 78r06            [12] 2238 	mov	r0,#_transmit_buffer_in_offset
+      000787 79r07            [12] 2239 	mov	r1,#_transmit_buffer_out_offset
+      000789 E6               [12] 2240 	mov	a,@r0
+      00078A C3               [12] 2241 	clr	c
+      00078B 97               [12] 2242 	subb	a,@r1
+                                   2243 ;	main.c:790: data_len = data_len < 0 ? 128 + data_len : data_len;
+      00078C FD               [12] 2244 	mov	r5,a
+      00078D 30 E7 06         [24] 2245 	jnb	acc.7,00146$
+      000790 74 80            [12] 2246 	mov	a,#0x80
+      000792 2D               [12] 2247 	add	a,r5
+      000793 FC               [12] 2248 	mov	r4,a
+      000794 80 02            [24] 2249 	sjmp	00147$
+      000796                       2250 00146$:
+      000796 8D 04            [24] 2251 	mov	ar4,r5
+      000798                       2252 00147$:
+      000798 8C 05            [24] 2253 	mov	ar5,r4
+                                   2254 ;	main.c:791: if (data_len > 0) // 2 for modem bytes.
+      00079A C3               [12] 2255 	clr	c
+      00079B 74 80            [12] 2256 	mov	a,#(0x00 ^ 0x80)
+      00079D 8D F0            [24] 2257 	mov	b,r5
+      00079F 63 F0 80         [24] 2258 	xrl	b,#0x80
+      0007A2 95 F0            [12] 2259 	subb	a,b
+      0007A4 50 59            [24] 2260 	jnc	00132$
+                                   2261 ;	main.c:794: send_len = (data_len >= 62) ? 62 : data_len;
+      0007A6 C3               [12] 2262 	clr	c
+      0007A7 ED               [12] 2263 	mov	a,r5
+      0007A8 64 80            [12] 2264 	xrl	a,#0x80
+      0007AA 94 BE            [12] 2265 	subb	a,#0xbe
+      0007AC 40 06            [24] 2266 	jc	00148$
+      0007AE 7B 3E            [12] 2267 	mov	r3,#0x3e
+      0007B0 7C 00            [12] 2268 	mov	r4,#0x00
+      0007B2 80 06            [24] 2269 	sjmp	00149$
+      0007B4                       2270 00148$:
+      0007B4 ED               [12] 2271 	mov	a,r5
+      0007B5 FB               [12] 2272 	mov	r3,a
+      0007B6 33               [12] 2273 	rlc	a
+      0007B7 95 E0            [12] 2274 	subb	a,acc
+      0007B9 FC               [12] 2275 	mov	r4,a
+      0007BA                       2276 00149$:
+      0007BA 78r08            [12] 2277 	mov	r0,#_send_len
+      0007BC A6 03            [24] 2278 	mov	@r0,ar3
+                                   2279 ;	main.c:796: for (i = 0; i < send_len; i++)
+      0007BE 7D 00            [12] 2280 	mov	r5,#0x00
+      0007C0                       2281 00142$:
+      0007C0 C3               [12] 2282 	clr	c
+      0007C1 ED               [12] 2283 	mov	a,r5
+      0007C2 9B               [12] 2284 	subb	a,r3
+      0007C3 50 2B            [24] 2285 	jnc	00125$
+                                   2286 ;	main.c:798: Ep1Buffer[i + 2] = transmit_buffer[transmit_buffer_out_offset];
+      0007C5 8D 04            [24] 2287 	mov	ar4,r5
+      0007C7 0C               [12] 2288 	inc	r4
+      0007C8 0C               [12] 2289 	inc	r4
+      0007C9 EC               [12] 2290 	mov	a,r4
+      0007CA 33               [12] 2291 	rlc	a
+      0007CB 95 E0            [12] 2292 	subb	a,acc
+      0007CD FA               [12] 2293 	mov	r2,a
+      0007CE EC               [12] 2294 	mov	a,r4
+      0007CF 24 40            [12] 2295 	add	a,#_Ep1Buffer
+      0007D1 FC               [12] 2296 	mov	r4,a
+      0007D2 EA               [12] 2297 	mov	a,r2
+      0007D3 34 01            [12] 2298 	addc	a,#(_Ep1Buffer >> 8)
+      0007D5 FA               [12] 2299 	mov	r2,a
+      0007D6 78r07            [12] 2300 	mov	r0,#_transmit_buffer_out_offset
+      0007D8 86 82            [24] 2301 	mov	dpl,@r0
+      0007DA 75 83 00         [24] 2302 	mov	dph,#(_transmit_buffer >> 8)
+      0007DD E0               [24] 2303 	movx	a,@dptr
+      0007DE FE               [12] 2304 	mov	r6,a
+      0007DF 8C 82            [24] 2305 	mov	dpl,r4
+      0007E1 8A 83            [24] 2306 	mov	dph,r2
+      0007E3 F0               [24] 2307 	movx	@dptr,a
+                                   2308 ;	main.c:799: transmit_buffer_out_offset++;
+      0007E4 78r07            [12] 2309 	mov	r0,#_transmit_buffer_out_offset
+      0007E6 06               [12] 2310 	inc	@r0
+                                   2311 ;	main.c:800: transmit_buffer_out_offset &= 0x7f;// %= sizeof(transmit_buffer);
+      0007E7 78r07            [12] 2312 	mov	r0,#_transmit_buffer_out_offset
+      0007E9 E6               [12] 2313 	mov	a,@r0
+      0007EA 54 7F            [12] 2314 	anl	a,#0x7f
+      0007EC F6               [12] 2315 	mov	@r0,a
+                                   2316 ;	main.c:796: for (i = 0; i < send_len; i++)
+      0007ED 0D               [12] 2317 	inc	r5
+      0007EE 80 D0            [24] 2318 	sjmp	00142$
+      0007F0                       2319 00125$:
+                                   2320 ;	main.c:825: ep1_in_busy = 1;
+      0007F0 78r04            [12] 2321 	mov	r0,#_ep1_in_busy
+      0007F2 76 01            [12] 2322 	mov	@r0,#0x01
+                                   2323 ;	main.c:826: UEP1_T_LEN = send_len + 2;
+      0007F4 74 02            [12] 2324 	mov	a,#0x02
+      0007F6 2B               [12] 2325 	add	a,r3
+      0007F7 F5 D3            [12] 2326 	mov	_UEP1_T_LEN,a
+                                   2327 ;	main.c:827: UEP1_CTRL = UEP1_CTRL & ~MASK_UEP_T_RES | UEP_T_RES_ACK; //应答ACK
+      0007F9 53 D2 FC         [24] 2328 	anl	_UEP1_CTRL,#0xfc
+      0007FC 02r06r25         [24] 2329 	ljmp	00139$
+      0007FF                       2330 00132$:
+                                   2331 ;	main.c:829: else if ((sof_count - timeout_count) > latency_timer)
+      0007FF 78r02            [12] 2332 	mov	r0,#_sof_count
+      000801 E6               [12] 2333 	mov	a,@r0
+      000802 C3               [12] 2334 	clr	c
+      000803 95*13            [12] 2335 	subb	a,_main_timeout_count_65536_102
+      000805 FD               [12] 2336 	mov	r5,a
+      000806 08               [12] 2337 	inc	r0
+      000807 E6               [12] 2338 	mov	a,@r0
+      000808 95*14            [12] 2339 	subb	a,(_main_timeout_count_65536_102 + 1)
+      00080A FE               [12] 2340 	mov	r6,a
+      00080B 78r05            [12] 2341 	mov	r0,#_latency_timer
+      00080D 86 03            [24] 2342 	mov	ar3,@r0
+      00080F 7C 00            [12] 2343 	mov	r4,#0x00
+      000811 C3               [12] 2344 	clr	c
+      000812 EB               [12] 2345 	mov	a,r3
+      000813 9D               [12] 2346 	subb	a,r5
+      000814 EC               [12] 2347 	mov	a,r4
+      000815 9E               [12] 2348 	subb	a,r6
+      000816 50 14            [24] 2349 	jnc	00129$
+                                   2350 ;	main.c:831: timeout_count = sof_count;
+      000818 78r02            [12] 2351 	mov	r0,#_sof_count
+      00081A 86*13            [24] 2352 	mov	_main_timeout_count_65536_102,@r0
+      00081C 08               [12] 2353 	inc	r0
+      00081D 86*14            [24] 2354 	mov	(_main_timeout_count_65536_102 + 1),@r0
+                                   2355 ;	main.c:832: ep1_in_busy = 1;
+      00081F 78r04            [12] 2356 	mov	r0,#_ep1_in_busy
+      000821 76 01            [12] 2357 	mov	@r0,#0x01
+                                   2358 ;	main.c:833: UEP1_T_LEN = 2;											 //预使用发送长度一定要清空
+      000823 75 D3 02         [24] 2359 	mov	_UEP1_T_LEN,#0x02
+                                   2360 ;	main.c:834: UEP1_CTRL = UEP1_CTRL & ~MASK_UEP_T_RES | UEP_T_RES_ACK; //应答ACK
+      000826 53 D2 FC         [24] 2361 	anl	_UEP1_CTRL,#0xfc
+      000829 02r06r25         [24] 2362 	ljmp	00139$
+      00082C                       2363 00129$:
+                                   2364 ;	main.c:836: else if(send_dummy)
+      00082C E5*06            [12] 2365 	mov	a,_send_dummy
+      00082E 70 03            [24] 2366 	jnz	00267$
+      000830 02r06r25         [24] 2367 	ljmp	00139$
+      000833                       2368 00267$:
+                                   2369 ;	main.c:838: send_dummy--;
+      000833 15*06            [12] 2370 	dec	_send_dummy
+                                   2371 ;	main.c:839: ep1_in_busy = 1;
+      000835 78r04            [12] 2372 	mov	r0,#_ep1_in_busy
+      000837 76 01            [12] 2373 	mov	@r0,#0x01
+                                   2374 ;	main.c:840: UEP1_T_LEN = 2;											 //预使用发送长度一定要清空
+      000839 75 D3 02         [24] 2375 	mov	_UEP1_T_LEN,#0x02
+                                   2376 ;	main.c:841: UEP1_CTRL = UEP1_CTRL & ~MASK_UEP_T_RES | UEP_T_RES_ACK; //应答ACK
+      00083C 53 D2 FC         [24] 2377 	anl	_UEP1_CTRL,#0xfc
+                                   2378 ;	main.c:846: }
+      00083F 02r06r25         [24] 2379 	ljmp	00139$
+                                   2380 	.area CSEG    (CODE)
+                                   2381 	.area CONST   (CODE)
+      000000                       2382 _ftdi_rom:
+      000000 00                    2383 	.db #0x00	; 0
+      000001 00                    2384 	.db #0x00	; 0
+      000002 FB                    2385 	.db #0xfb	; 251
+      000003 09                    2386 	.db #0x09	; 9
+      000004 01                    2387 	.db #0x01	; 1
+      000005 60                    2388 	.db #0x60	; 96
+      000006 00                    2389 	.db #0x00	; 0
+      000007 04                    2390 	.db #0x04	; 4
+      000008 80                    2391 	.db #0x80	; 128
+      000009 E1                    2392 	.db #0xe1	; 225
+      00000A 1C                    2393 	.db #0x1c	; 28
+      00000B 00                    2394 	.db #0x00	; 0
+      00000C 00                    2395 	.db #0x00	; 0
+      00000D 02                    2396 	.db #0x02	; 2
+      00000E 94                    2397 	.db #0x94	; 148
+      00000F 0E                    2398 	.db #0x0e	; 14
+      000010 A2                    2399 	.db #0xa2	; 162
+      000011 18                    2400 	.db #0x18	; 24
+      000012 BA                    2401 	.db #0xba	; 186
+      000013 12                    2402 	.db #0x12	; 18
+      000014 0E                    2403 	.db #0x0e	; 14
+      000015 03                    2404 	.db #0x03	; 3
+      000016 41                    2405 	.db #0x41	; 65	'A'
+      000017 00                    2406 	.db #0x00	; 0
+      000018 6C                    2407 	.db #0x6c	; 108	'l'
+      000019 00                    2408 	.db #0x00	; 0
+      00001A 74                    2409 	.db #0x74	; 116	't'
+      00001B 00                    2410 	.db #0x00	; 0
+      00001C 65                    2411 	.db #0x65	; 101	'e'
+      00001D 00                    2412 	.db #0x00	; 0
+      00001E 72                    2413 	.db #0x72	; 114	'r'
+      00001F 00                    2414 	.db #0x00	; 0
+      000020 61                    2415 	.db #0x61	; 97	'a'
+      000021 00                    2416 	.db #0x00	; 0
+      000022 18                    2417 	.db #0x18	; 24
+      000023 03                    2418 	.db #0x03	; 3
+      000024 55                    2419 	.db #0x55	; 85	'U'
+      000025 00                    2420 	.db #0x00	; 0
+      000026 53                    2421 	.db #0x53	; 83	'S'
+      000027 00                    2422 	.db #0x00	; 0
+      000028 42                    2423 	.db #0x42	; 66	'B'
+      000029 00                    2424 	.db #0x00	; 0
+      00002A 2D                    2425 	.db #0x2d	; 45
+      00002B 00                    2426 	.db #0x00	; 0
+      00002C 42                    2427 	.db #0x42	; 66	'B'
+      00002D 00                    2428 	.db #0x00	; 0
+      00002E 6C                    2429 	.db #0x6c	; 108	'l'
+      00002F 00                    2430 	.db #0x00	; 0
+      000030 61                    2431 	.db #0x61	; 97	'a'
+      000031 00                    2432 	.db #0x00	; 0
+      000032 73                    2433 	.db #0x73	; 115	's'
+      000033 00                    2434 	.db #0x00	; 0
+      000034 74                    2435 	.db #0x74	; 116	't'
+      000035 00                    2436 	.db #0x00	; 0
+      000036 65                    2437 	.db #0x65	; 101	'e'
+      000037 00                    2438 	.db #0x00	; 0
+      000038 72                    2439 	.db #0x72	; 114	'r'
+      000039 00                    2440 	.db #0x00	; 0
+      00003A 12                    2441 	.db #0x12	; 18
+      00003B 03                    2442 	.db #0x03	; 3
+      00003C 31                    2443 	.db #0x31	; 49	'1'
+      00003D 00                    2444 	.db #0x00	; 0
+      00003E 32                    2445 	.db #0x32	; 50	'2'
+      00003F 00                    2446 	.db #0x00	; 0
+      000040 33                    2447 	.db #0x33	; 51	'3'
+      000041 00                    2448 	.db #0x00	; 0
+      000042 34                    2449 	.db #0x34	; 52	'4'
+      000043 00                    2450 	.db #0x00	; 0
+      000044 35                    2451 	.db #0x35	; 53	'5'
+      000045 00                    2452 	.db #0x00	; 0
+      000046 36                    2453 	.db #0x36	; 54	'6'
+      000047 00                    2454 	.db #0x00	; 0
+      000048 37                    2455 	.db #0x37	; 55	'7'
+      000049 00                    2456 	.db #0x00	; 0
+      00004A 38                    2457 	.db #0x38	; 56	'8'
+      00004B 00                    2458 	.db #0x00	; 0
+      00004C 02                    2459 	.db #0x02	; 2
+      00004D 03                    2460 	.db #0x03	; 3
+      00004E 01                    2461 	.db #0x01	; 1
+      00004F 00                    2462 	.db #0x00	; 0
+      000050 52                    2463 	.db #0x52	; 82	'R'
+      000051 45                    2464 	.db #0x45	; 69	'E'
+      000052 56                    2465 	.db #0x56	; 86	'V'
+      000053 43                    2466 	.db #0x43	; 67	'C'
+      000054 00                    2467 	.db #0x00	; 0
+      000055 00                    2468 	.db #0x00	; 0
+      000056 00                    2469 	.db #0x00	; 0
+      000057 00                    2470 	.db #0x00	; 0
+      000058 00                    2471 	.db #0x00	; 0
+      000059 00                    2472 	.db #0x00	; 0
+      00005A 00                    2473 	.db #0x00	; 0
+      00005B 00                    2474 	.db #0x00	; 0
+      00005C 00                    2475 	.db #0x00	; 0
+      00005D 00                    2476 	.db #0x00	; 0
+      00005E 00                    2477 	.db #0x00	; 0
+      00005F 00                    2478 	.db #0x00	; 0
+      000060 00                    2479 	.db #0x00	; 0
+      000061 00                    2480 	.db #0x00	; 0
+      000062 00                    2481 	.db #0x00	; 0
+      000063 00                    2482 	.db #0x00	; 0
+      000064 00                    2483 	.db #0x00	; 0
+      000065 00                    2484 	.db #0x00	; 0
+      000066 00                    2485 	.db #0x00	; 0
+      000067 00                    2486 	.db #0x00	; 0
+      000068 00                    2487 	.db #0x00	; 0
+      000069 00                    2488 	.db #0x00	; 0
+      00006A 00                    2489 	.db #0x00	; 0
+      00006B 00                    2490 	.db #0x00	; 0
+      00006C 00                    2491 	.db #0x00	; 0
+      00006D 00                    2492 	.db #0x00	; 0
+      00006E 00                    2493 	.db #0x00	; 0
+      00006F 00                    2494 	.db #0x00	; 0
+      000070 00                    2495 	.db #0x00	; 0
+      000071 00                    2496 	.db #0x00	; 0
+      000072 00                    2497 	.db #0x00	; 0
+      000073 00                    2498 	.db #0x00	; 0
+      000074 00                    2499 	.db #0x00	; 0
+      000075 00                    2500 	.db #0x00	; 0
+      000076 00                    2501 	.db #0x00	; 0
+      000077 00                    2502 	.db #0x00	; 0
+      000078 00                    2503 	.db #0x00	; 0
+      000079 00                    2504 	.db #0x00	; 0
+      00007A 00                    2505 	.db #0x00	; 0
+      00007B 00                    2506 	.db #0x00	; 0
+      00007C 00                    2507 	.db #0x00	; 0
+      00007D 00                    2508 	.db #0x00	; 0
+      00007E B5                    2509 	.db #0xb5	; 181
+      00007F B2                    2510 	.db #0xb2	; 178
+      000080                       2511 _DevDesc:
+      000080 12                    2512 	.db #0x12	; 18
+      000081 01                    2513 	.db #0x01	; 1
+      000082 00                    2514 	.db #0x00	; 0
+      000083 02                    2515 	.db #0x02	; 2
+      000084 00                    2516 	.db #0x00	; 0
+      000085 00                    2517 	.db #0x00	; 0
+      000086 00                    2518 	.db #0x00	; 0
+      000087 08                    2519 	.db #0x08	; 8
+      000088 FB                    2520 	.db #0xfb	; 251
+      000089 09                    2521 	.db #0x09	; 9
+      00008A 01                    2522 	.db #0x01	; 1
+      00008B 60                    2523 	.db #0x60	; 96
+      00008C 00                    2524 	.db #0x00	; 0
+      00008D 04                    2525 	.db #0x04	; 4
+      00008E 01                    2526 	.db #0x01	; 1
+      00008F 02                    2527 	.db #0x02	; 2
+      000090 03                    2528 	.db #0x03	; 3
+      000091 01                    2529 	.db #0x01	; 1
+      000092                       2530 _CfgDesc:
+      000092 09                    2531 	.db #0x09	; 9
+      000093 02                    2532 	.db #0x02	; 2
+      000094 20                    2533 	.db #0x20	; 32
+      000095 00                    2534 	.db #0x00	; 0
+      000096 01                    2535 	.db #0x01	; 1
+      000097 01                    2536 	.db #0x01	; 1
+      000098 00                    2537 	.db #0x00	; 0
+      000099 80                    2538 	.db #0x80	; 128
+      00009A E1                    2539 	.db #0xe1	; 225
+      00009B 09                    2540 	.db #0x09	; 9
+      00009C 04                    2541 	.db #0x04	; 4
+      00009D 00                    2542 	.db #0x00	; 0
+      00009E 00                    2543 	.db #0x00	; 0
+      00009F 02                    2544 	.db #0x02	; 2
+      0000A0 FF                    2545 	.db #0xff	; 255
+      0000A1 FF                    2546 	.db #0xff	; 255
+      0000A2 FF                    2547 	.db #0xff	; 255
+      0000A3 00                    2548 	.db #0x00	; 0
+      0000A4 07                    2549 	.db #0x07	; 7
+      0000A5 05                    2550 	.db #0x05	; 5
+      0000A6 81                    2551 	.db #0x81	; 129
+      0000A7 02                    2552 	.db #0x02	; 2
+      0000A8 40                    2553 	.db #0x40	; 64
+      0000A9 00                    2554 	.db #0x00	; 0
+      0000AA 01                    2555 	.db #0x01	; 1
+      0000AB 07                    2556 	.db #0x07	; 7
+      0000AC 05                    2557 	.db #0x05	; 5
+      0000AD 02                    2558 	.db #0x02	; 2
+      0000AE 02                    2559 	.db #0x02	; 2
+      0000AF 40                    2560 	.db #0x40	; 64
+      0000B0 00                    2561 	.db #0x00	; 0
+      0000B1 01                    2562 	.db #0x01	; 1
+      0000B2                       2563 _LangDes:
+      0000B2 04                    2564 	.db #0x04	; 4
+      0000B3 03                    2565 	.db #0x03	; 3
+      0000B4 09                    2566 	.db #0x09	; 9
+      0000B5 04                    2567 	.db #0x04	; 4
+      0000B6                       2568 _SerDes:
+      0000B6 12                    2569 	.db #0x12	; 18
+      0000B7 03                    2570 	.db #0x03	; 3
+      0000B8 31                    2571 	.db #0x31	; 49	'1'
+      0000B9 00                    2572 	.db #0x00	; 0
+      0000BA 32                    2573 	.db #0x32	; 50	'2'
+      0000BB 00                    2574 	.db #0x00	; 0
+      0000BC 33                    2575 	.db #0x33	; 51	'3'
+      0000BD 00                    2576 	.db #0x00	; 0
+      0000BE 34                    2577 	.db #0x34	; 52	'4'
+      0000BF 00                    2578 	.db #0x00	; 0
+      0000C0 35                    2579 	.db #0x35	; 53	'5'
+      0000C1 00                    2580 	.db #0x00	; 0
+      0000C2 36                    2581 	.db #0x36	; 54	'6'
+      0000C3 00                    2582 	.db #0x00	; 0
+      0000C4 37                    2583 	.db #0x37	; 55	'7'
+      0000C5 00                    2584 	.db #0x00	; 0
+      0000C6 38                    2585 	.db #0x38	; 56	'8'
+      0000C7 00                    2586 	.db #0x00	; 0
+      0000C8                       2587 _Prod_Des:
+      0000C8 18                    2588 	.db #0x18	; 24
+      0000C9 03                    2589 	.db #0x03	; 3
+      0000CA 55                    2590 	.db #0x55	; 85	'U'
+      0000CB 00                    2591 	.db #0x00	; 0
+      0000CC 53                    2592 	.db #0x53	; 83	'S'
+      0000CD 00                    2593 	.db #0x00	; 0
+      0000CE 42                    2594 	.db #0x42	; 66	'B'
+      0000CF 00                    2595 	.db #0x00	; 0
+      0000D0 2D                    2596 	.db #0x2d	; 45
+      0000D1 00                    2597 	.db #0x00	; 0
+      0000D2 42                    2598 	.db #0x42	; 66	'B'
+      0000D3 00                    2599 	.db #0x00	; 0
+      0000D4 6C                    2600 	.db #0x6c	; 108	'l'
+      0000D5 00                    2601 	.db #0x00	; 0
+      0000D6 61                    2602 	.db #0x61	; 97	'a'
+      0000D7 00                    2603 	.db #0x00	; 0
+      0000D8 73                    2604 	.db #0x73	; 115	's'
+      0000D9 00                    2605 	.db #0x00	; 0
+      0000DA 74                    2606 	.db #0x74	; 116	't'
+      0000DB 00                    2607 	.db #0x00	; 0
+      0000DC 65                    2608 	.db #0x65	; 101	'e'
+      0000DD 00                    2609 	.db #0x00	; 0
+      0000DE 72                    2610 	.db #0x72	; 114	'r'
+      0000DF 00                    2611 	.db #0x00	; 0
+      0000E0                       2612 _Manuf_Des:
+      0000E0 0E                    2613 	.db #0x0e	; 14
+      0000E1 03                    2614 	.db #0x03	; 3
+      0000E2 41                    2615 	.db #0x41	; 65	'A'
+      0000E3 00                    2616 	.db #0x00	; 0
+      0000E4 6C                    2617 	.db #0x6c	; 108	'l'
+      0000E5 00                    2618 	.db #0x00	; 0
+      0000E6 74                    2619 	.db #0x74	; 116	't'
+      0000E7 00                    2620 	.db #0x00	; 0
+      0000E8 65                    2621 	.db #0x65	; 101	'e'
+      0000E9 00                    2622 	.db #0x00	; 0
+      0000EA 72                    2623 	.db #0x72	; 114	'r'
+      0000EB 00                    2624 	.db #0x00	; 0
+      0000EC 61                    2625 	.db #0x61	; 97	'a'
+      0000ED 00                    2626 	.db #0x00	; 0
+                                   2627 	.area XINIT   (CODE)
+                                   2628 	.area CABS    (ABS,CODE)
